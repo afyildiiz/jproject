@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomerComponent } from './components/customer/customer.component';
@@ -10,6 +10,9 @@ import { ItemComponent } from './components/item/item.component';
 import { LeftbarComponent } from './components/leftbar/leftbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjeUpdateComponent } from './components/proje-update/proje-update.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,17 @@ import { ProjeUpdateComponent } from './components/proje-update/proje-update.com
     ItemComponent,
     LeftbarComponent,
     HomeComponent,
-    ProjeUpdateComponent
+    ProjeUpdateComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,95 @@
-<p>customer works!</p>
+
+<div class="container" style="margin-top: 15px;">
+<h1>KAYITLI MÜŞTERİLER</h1>
+
+
+      <div >
+        
+        <div>
+  
+          <div class="row">
+            <button (click)="openCustomer(customer)" class="btn btn-success" style="float: right; border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-plus"></i></button>
+            <table class="table" id="myTable" style="border-left:1px solid black;border-right: 1px solid black;margin-top: 24px;">
+              <thead>
+                <tr style="background-color: #313131; color: white">
+                  <th scope="col">Şirket Adı</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th>
+                  <th scope="col">Adres</th>
+                  <th scope="col">Telefon</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Vergi Dairesi</th>
+                  <th scope="col">Vergi No</th>
+                  <th scope="col">Açıklama</th>
+                  <th scope="col">Yetkili Kişi</th>
+                  <th scope="col">Unvan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of customers">
+                  <td > {{item.sirket_adi}} </td>
+                  <td>{{item.ad}}</td>
+                  <td> {{item.soyad}} </td>
+                  <td> {{item.adres}} </td>
+                  <td> {{item.tel}} </td>
+                  <td> {{item.email}} </td>
+                  <td> {{item.vergi_dairesi}} </td>
+                  <td> {{item.vergi_no}} </td>
+                  <td> {{item.aciklama}} </td>
+                  <td> {{item.yetkili}} </td>
+                  <td> {{item.unvan}} </td>
+                </tr>
+              </tbody>
+            </table>
+  
+  
+            </div>
+  
+        </div>
+      </div>
+
+    <ng-template #customer>
+      <body>
+        
+      <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-10 col-md-9 col-12 text-center">
+              <div style="margin-bottom: 2rem;" class="modal-header d-flex justify-content-center">
+                <h3 class="">Müşteri Ekle</h3>
+                <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px" (click)="closeCustomer()"></button>
+              </div>
+                    <form class="form-card" [formGroup]="customerForm" >
+                      <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Ad<span class="text-danger"> *</span></label> <input formControlName="ad" type="text"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Soyad<span class="text-danger"> *</span></label> <input formControlName="soyad" type="text" > </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Unvan<span class="text-danger"> *</span></label> <input formControlName="unvan" type="text" > </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Adres<span class="text-danger"> *</span></label> <input formControlName="adres" type="text" > </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Telefon<span class="text-danger"> *</span></label> <input formControlName="tel" type="text" > </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">E-mail<span class="text-danger"> *</span></label> <input formControlName="email" type="text" > </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Vergi Dairesi<span class="text-danger"> *</span></label> <input formControlName="vergi_dairesi" type="text"></div>
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Vergi No<span class="text-danger"> *</span></label> <input formControlName="vergi_no" type="text" > </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Açıklama <span class="text-danger"> *</span></label> <textarea formControlName="aciklama" name="" id="" cols="30" rows="3"></textarea> </div>
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Şirket Adı <span class="text-danger"> *</span></label> <input type="text" formControlName="sirket_adi"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-6 flex-column d-flex"></div>
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Yetkili <span class="text-danger"> *</span></label> <input type="text" formControlName="yetkili"> </div>
+                    </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="button" (click)="saveCustomer()" class="btn-block btn-primary">Kaydet</button> </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+  </body>
+
+    </ng-template>
