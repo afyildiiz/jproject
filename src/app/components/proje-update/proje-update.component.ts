@@ -10,6 +10,8 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./proje-update.component.scss']
 })
 export class ProjeUpdateComponent implements OnInit {
+  @Input() project!:any
+
   @Input() data!: Pipeline;
   projectForm!: FormGroup;
   updateForm!:FormGroup

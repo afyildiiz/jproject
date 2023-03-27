@@ -31,6 +31,7 @@ export class LeftbarComponent implements OnInit {
     this.getCustomerCount();
     this.getSupplierCount();
     this.getItemCount();
+
   }
 
   getProjectCount(){

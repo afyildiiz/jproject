@@ -75,46 +75,20 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
     })
   }
 
-  // saveProject(){
-  //   if (this.projectForm.valid){
-  //     let item=Object.assign(this.projectForm.value);
-  //     item.dateAdded = new Date();
-
-  //     this.task.insertProject(item).subscribe((res:any)=>{
-  //       console.log("Project",res.value,"at ", item.dateAdded)
-  //       alert("Kaydedildi!")
-  //       this.getProject()
-  //       this.modal.dismissAll()
-  //     })
-  //   }else{
-  //     alert("boslukları doldurun")
-  //   }
-  // }
   saveProject(){
-    Swal.fire({
-      title:'Kayıt ekleniyor',
-      text:'Kaydı eklemek istiyor musunuz ?',
-      icon:"question",
-      confirmButtonText:"Evet",
-      denyButtonText:"Hayır",
-      showCancelButton:true
-    }).then((result)=>{
-      if (result.isConfirmed)
-        if(this.projectForm.valid)
-        {
-        let proj=Object.assign(this.projectForm.value)
-        this.task.insertProject(proj).subscribe(res=>{
-          if (res=='Success'){
-            Swal.fire("Başarıyla Eklendi","","success")
-          }
-          else if (result.dismiss===Swal.DismissReason.cancel)
-          {
-            
-          }
-        })
-        }
+    if (this.projectForm.valid){
+      let item=Object.assign(this.projectForm.value);
+      item.dateAdded = new Date();
+
+      this.task.insertProject(item).subscribe((res:any)=>{
+        console.log("Project",res.value,"at ", item.dateAdded)
+        alert("Kaydedildi!")
         this.getProject()
-    })
+        this.modal.dismissAll()
+      })
+    }else{
+      alert("boslukları doldurun")
+    }
   }
 
   // deleteProject(id:any){
@@ -167,10 +141,10 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
     this.modal.open(detail,{ size:'lg',centered:true })
   }
 
-  row:any
-  edit(row: any) {
+
+  edit(project: any) {
     const modalRef = this.modal.open(ProjeUpdateComponent,{ windowClass:'custom-modal'});
-    modalRef.componentInstance.projects = row;
+    modalRef.componentInstance.projects = project;
   }
 
 
