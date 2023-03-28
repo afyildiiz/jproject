@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Pipeline } from 'src/app/models/pipeline';
+import { Pipeline } from 'src/app/pipeline';
 import { TaskService } from 'src/app/services/task.service';
 import Swal from 'sweetalert2'
 import { ProjeUpdateComponent } from '../proje-update/proje-update.component';

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { Customer } from '../models/customer';
-import { Item } from '../models/item';
-import { Pipeline } from '../models/pipeline';
-import { Supplier } from '../models/supplier';
+import { Customer } from '../customer';
+import { Item } from '../item';
+import { Pipeline } from '../pipeline';
+import { Supplier } from '../supplier';
 
 import { baseUrl } from '../utils/baseUrl';
 

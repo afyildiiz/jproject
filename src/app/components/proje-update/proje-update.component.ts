@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Pipeline } from 'src/app/models/pipeline';
+import { Pipeline } from 'src/app/pipeline';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({

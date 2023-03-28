@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Supplier } from 'src/app/models/supplier';
+import { Supplier } from 'src/app/supplier';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
