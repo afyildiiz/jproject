@@ -1,79 +1,17 @@
-  <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="mb-4">
-                <div class="input-group">
-                    <input placeholder="Search for..." type="text" class="form-control">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-4">
-                <div class="small mb-3">Favorites</div>
-                <ul class="nav flex-column nav-pills">
-                    <li class="nav-item active"><a [routerLink]="['/home']" class="nav-link"><i class="fa fa-fw fa-line-chart mr-2"></i>Genel Bakış</a></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-calendar-o mr-2"></i>Calendar</a></li> -->
-                </ul>
-            </div>
-            <div class="mb-4">
-                <div class="small mb-3">İşlem Kategorisi</div>
-                <ul class="nav flex-column nav-pills" >
-                    <li class="nav-item" style="width: 75%;"><a [routerLink]="['/supplier']" class="d-flex nav-link"><i class="fa fa-fw fa-star-o align-self-center mr-2"></i>Tedarikçiler<span style="color: black;" class="ml-auto align-self-center badge badge-secondary badge-pill"> {{supplierCount}} </span></a></li>
-                    <li class="nav-item"  style="width: 75%;"><a [routerLink]="['/customer']" class="d-flex nav-link"><i class="fa fa-fw fa-star-o align-self-center mr-2"></i>Müşteriler<span style="color: black;" class="ml-auto align-self-center badge badge-secondary badge-pill"> {{customerCount}} </span></a></li>
-                    <li class="nav-item"  style="width: 75%;"><a [routerLink]="['/item']" class="d-flex nav-link"><i class="fa fa-fw fa-star-o align-self-center mr-2"></i>İş Kalemleri<span style="color: black;" class="ml-auto align-self-center badge badge-secondary badge-pill"> {{itemCount}} </span></a></li>
-                    <li class="nav-item"  style="width: 75%;"><a [routerLink]="['/project']" class="d-flex nav-link"><i class="fa fa-fw fa-star-o align-self-center mr-2"></i>Projeler<span style="color: black;" class="ml-auto align-self-center badge badge-secondary badge-pill">{{projectCount}}</span></a></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New Project</a></li>   -->
-                </ul>
-            </div>
-            <div class="mb-4">
-                <div class="small mb-3">People</div>
-                <ul class="nav flex-column nav-pills">
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar1.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Alva Kuhic</div><span class="small">Florida, AR</span></div>
-                            </div><i class="fa fa-fw fa-circle text-success ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar2.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Jeramy Gleason</div><span class="small">Indiana, AZ</span></div>
-                            </div><i class="fa fa-fw fa-circle text-warning ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Travis Koch</div><span class="small">Tennessee, AZ</span></div>
-                            </div><i class="fa fa-fw fa-circle text-danger ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li>
-                </ul>
-            </div>
-        </div>
+<div class="contain">
+<nav>
 
-        
+    <h1 style="margin-top: 1rem">DEMO PROJEM</h1>
+    <hr>
+  <ul>
+    <li><a href="#" class="active"><i class="fas fa-lg fa-th-large" active></i> Dashboard</a></li>
+    <li><a [routerLink]="['/customer']" ><i class="fas fa-lg fa-user"></i> Customers</a></li>
+    <li><a [routerLink]="['/supplier']" ><i class="far fa-lg fa-clipboard"></i> Suppliers</a></li>
+    <li><a [routerLink]="['/item']" ><i class="fas fa-lg fa-book"></i> Items</a></li>
+    <li><a [routerLink]="['/project']" ><i class="fas fa-lg fa-comments"></i> Projects</a></li>
+    <li><a href="#"><i class="fas fa-lg fa-map-marker-alt"></i> Maps</a></li>
+    <li><a href="#"><i class="fas fa-lg fa-bell"></i> Notifications</a></li>
+    <li><a href="#"><i class="fas fa-lg fa-globe"></i> RTL Support</a></li>
+  </ul>
+</nav>
+</div>
