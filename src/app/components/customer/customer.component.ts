@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from 'src/app/customer';
 
 import { TaskService } from 'src/app/services/task.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-customer',
@@ -63,5 +64,29 @@ export class CustomerComponent implements OnInit {
   }else{
     alert("Boşlukları doldurun!")
   }
+  }
+
+  deleteCustomer(id:any){
+    Swal.fire({
+      icon: 'question',
+      title: 'Kayıt Silinecek!',
+      text: 'Bu proje kaydını silmek istediğinize emin misiniz?',
+      showCancelButton: true,
+      confirmButtonText: 'Evet',
+      denyButtonText: 'Vazgeç',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.task.deleteCustomer(id).subscribe(res => {
+          if (res == 'Success')
+            Swal.fire('Proje başarıyla silindi!', '', 'success')
+          else if (result.dismiss===Swal.DismissReason.cancel)
+        {
+            Swal.fire('Bir Hata Oluştu!', '', 'success')
+        }
+        this.getCustomer()
+
+        })
+      }
+    })
   }
 }

@@ -77,3 +77,74 @@ h1 {
 .custom-class .dropdown-toggle::after {
   display: none;
 }
+
+
+
+.navElements {
+  list-style-type: none;
+  padding: 0;
+}
+
+// butonu kapatma
+// .togglebut button{
+//   display: none;
+// }
+
+.navleft{
+  display: block;
+  align-items: center;
+}
+
+.mainnav{
+  width: auto;
+}
+
+.navbar{
+  position: relative;
+}
+.togglebut {
+  position: absolute;
+  top: 0;
+  padding: 5px;
+  background-color:lightgray ;
+  border-radius: 10px;
+}
+.togglebut button{
+  background-color:lightgray;
+  // transition-duration: .3s;
+  // transition-timing-function: ease-in-out;
+  // transition-property: opacity, padding;
+  transition: opacity,padding .3s ease;
+  -webkit-transition: opacity,padding .3s ease;
+  -moz-transition: opacity,padding .3s ease; ;
+}
+.togglebut button:focus{
+  opacity: 0.6;
+  padding-left:3em;
+  
+  &:after {
+    position:absolute;
+    z-index:-1;
+
+    box-shadow:
+      1em 1em 0 2em rgba(255, 255, 255, .5)
+    ;
+  }
+}
+
+@media (max-width: 500) {
+  .navElements{
+    display: block;
+  }
+
+  .navleft{
+    display: none;
+  }
+
+  .mainnav{
+    width: 100%;
+  }
+}
+.row{
+  margin: 5px;
+}

@@ -1,58 +1,167 @@
-// body {
-//     color: #000;
-//     overflow-x: hidden;
-//     height: 100%;
-//     background-image: url("https://i.imgur.com/GMmCQHC.png");
-//     background-repeat: no-repeat;
-//     background-size: 100% 100%;
-//   }
-  .card {
-    padding: 30px 40px;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    border: none !important;
-    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+/*
+#################################################
+This is part of the UI framework being developed.
+#################################################
+*/
+//---------
+$gray0: #F6F8FF;
+$primary: #636983;
+$transition: all .2s;
+$gray1: #fbfbfb;
+
+
+.title {
+  text-align:center;
+  // padding: 40px 0;
+  font-size: 40px;
+  font-weight: 300;
+  color: $primary;
+}
+
+.wrapper {
+  // background-color: $gray0;
+  width: 100%;
+  min-height: 100vh;
+  
+  .line {
+    width: 100%;
+    margin: 50px auto 0 auto;
+    height: 1px;
   }
-  .blue-text {
-    color: #00bcd4;
-  }
-  .form-control-label {
-    margin-bottom: 0;
-  }
-  input,
-  textarea,
-  button {
-    padding: 8px 15px;
-    border-radius: 5px !important;
-    margin: 5px 0px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    font-size: 18px !important;
-    font-weight: 300;
-  }
-  input:focus,
-  textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #00bcd4;
-    outline-width: 0;
+}
+
+.table {
+  width: 100%;
+  margin: 0 auto;
+  
+  .header{
+    font-size: 16px;
     font-weight: 400;
-  }
-  .btn-block {
-    text-transform: uppercase;
-    font-size: 15px !important;
-    font-weight: 400;
-    height: 43px;
-    cursor: pointer;
-  }
-  .btn-block:hover {
-    color: #fff !important;
-  }
-  button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0;
   }
   
+  table {
+    width: 100%;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 25px 20px -25px rgb(0 0 0 / 10%);
+    
+    input.search{
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 0;
+      outline: 1px solid #efefef;
+      background: $gray1;
+      transition: $transition;
+      
+      &:focus{
+        outline: 2px solid #1f74ff;
+        background: white;
+      }
+    }
+    thead {
+      // background-color: $gray1;
+      border-spacing: 0;
+      
+      td {
+        font-size: 18px;
+        font-weight: 600;
+        color: #666;
+        padding: 10px;
+      }
+      
+      tr:nth-child(1){
+         background-color: $gray1;
+         background: linear-gradient(180deg, rgba(251,251,251,1) 0%, rgba(251,251,251,1) 89%, rgba(237,237,237,1) 100%);
+        
+        td:nth-child(1){
+          border-radius: 10px 0 0 0;
+        }
+        
+        td:nth-last-child(1){
+          border-radius: 0 10px 0 0;
+          
+        }
+      }
+    }
+    tbody{
+      tr {
+        transition: $transition;
+        
+        td {
+          padding: 10px;
+          color: #666;
+        }
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px -15px rgb(0 0 0 / 4%);
+          background-color: #ededed1c;
+        }
+        &.success{
+          td {
+            color: #46c93a;
+            background: #e8f5e7;
+          }
+        }
+        &.primary{
+          td {
+            color: #1f74ff;
+            background: #d4e4ff;
+          }
+        }
+      }
+    }
+    tfoot {
+      tr td {
+        border-radius: 0 0 10px 10px;
+      }
+      tr td {
+        padding: 3px 10px;
+        background-color: $gray1;
+        background: linear-gradient(0deg, rgba(251,251,251,1) 0%, rgba(251,251,251,1) 89%, rgba(237,237,237,1) 100%);
+        text-align: right;
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  position: relative;
+  right: 10px;
+  justify-content: flex-end;
+  gap: 5px;
+  
+  .page {
+    width: 10px;
+    height: 30px;
+    flex-basis: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 6px;
+    background: #f0f3f4;
+    border-radius: 7px;
+    color: $primary;
+    cursor: pointer;
+    
+    &.active {
+      background-color: #1f74ff;
+      color: white;
+      font-weight: 600;
+    }
+    
+    &:hover {
+      
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .table {
+    width: 90%;
+  }
+}

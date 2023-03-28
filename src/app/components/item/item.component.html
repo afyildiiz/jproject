@@ -1,7 +1,6 @@
 <!-- <app-navbar></app-navbar> -->
-
+<!-- 
 <div class="container" style="margin-top: 15px;">
-    <h1>KAYITLI İŞ KALEMLERİ</h1>
       <div >
         
         <div>
@@ -43,9 +42,66 @@
   
         </div>
       </div>
+    </div> -->
+
+  
+            <!-- <button (click)="openItem(item)" class="btn btn-success" style="float: right;border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-plus"></i></button> -->
+
+            <div class="wrapper">
+              <div class="title">
+                İŞ KALEMLERİ
+                <div class="line"></div>
+              </div>
+              <div class="container">
+          <button (click)="openItem(item)" class="btn btn-success" style="float: left;width: 50px;height: 50px;margin-bottom:1rem"><i class="fa-solid fa-plus"></i></button>
+
+                <div class="table">
+                  <div class="search" style="margin-bottom: 3rem;">
+                    <app-search-bar></app-search-bar>
+                </div>
+                  <table cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th scope="col">ITEM</th>
+                        <th scope="col">KATEGORİ</th>
+                        <th scope="col">MARKA</th>
+                        <th scope="col">MODEL</th>
+                        <th scope="col">MİKTAR/BİRİM</th>
+                        <th scope="col">DURUM</th>
+                        <th scope="col">TARİH</th>
+                        <th scope="col">MALİYET</th>
+                        <th scope="col">BİRİM</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of items">
+                        <td> {{item.item_adi}} </td>
+                        <td> {{item.kategori}} </td>
+                        <td> {{item.marka}} </td>
+                        <td> {{item.model}} </td>
+                        <td> {{item.miktar_birim}} </td>
+                        <td> {{item.durum}} </td>
+                        <td> {{item.tarih|date:"shortDate"}} </td>
+                        <td> {{item.maliyet}} </td>
+                        <td> {{item.birim}} </td>
+                      </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
   
   
+
+
+
+
+
+
+
+
+
+
     <ng-template #item>
       <div class="container-fluid px-1 py-5 mx-auto">
         <div class="row d-flex justify-content-center">

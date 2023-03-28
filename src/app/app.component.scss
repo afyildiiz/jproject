@@ -1,8 +1,61 @@
-.leftbar{
-    width: 24%;
+// .content-body{
+//   width: 85%;
+.navbar{
+  display:contents;
+}
+.wrap {
+  width: 100%;
+  margin: 0 auto;
+  }
+  .content-body{
+  width: 100%;
+  float: left;
+  }
+
+  .leftbar, .navbar, .routero{
+  width: 100%;
+  float: left;
+  }
+  @media only screen and (min-width: 500px) {
+  .wrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .leftbar{
+    width: 19%;
     float: left;
+    margin-top: 1rem;
   }
   .routero{
-    width: 72%;
+    width: 80%;
+    float: left;
+    margin-top: 1rem;
+  }
+  .navbar{
+    width: 100%;
     float: left;
   }
+
+  }
+  @media only screen and (min-width: 500px) {
+  .wrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+  }
+
+
+
+  // @media screen and (max-width: 600px) {
+  //   #leftBar{
+  //      position: fixed;
+  //      top: 0;
+  //      width:100%
+  //    }
+  //    .content-body{
+  //      width: 100%;
+  //      position: fixed;
+  //      margin-top: 60rem;
+  //      height: 100%;
+  //    }
+  //  }

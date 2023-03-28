@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   isAdded:boolean=false
 
+
   projects:Pipeline[]=[]
   projectForm!:FormGroup
   musteriCombobox:any=[]

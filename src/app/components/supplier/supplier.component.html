@@ -1,51 +1,54 @@
-<!-- <app-navbar></app-navbar> -->
 
-<div class="container" style="margin-top: 15px;">
-    <h1>KAYITLI TEDARİKÇİLER</h1>
-    
-          <div >
-            <div>
-                <div class="row">
-                  <button (click)="openSupplier(supplier)" class="btn btn-success" style="float: right;border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-plus"></i></button>
-                    <table class="table" id="myTable" style="border-left:1px solid black;border-right: 1px solid black;margin-top: 24px;">
-                      <thead>
-                        <tr style="background-color: #313131; color: white">
-                          <th scope="col">Şirket Adı</th>
-                          <!-- <th scope="col">Ad</th>
-                          <th scope="col">Soyad</th> -->
-                          <th scope="col">Adres</th>
-                          <th scope="col">Telefon</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">Vergi Dairesi</th>
-                          <th scope="col">Vergi No</th>
-                          <th scope="col">Açıklama</th>
-                          <th scope="col">Yetkili Kişi</th>
-                          <th scope="col">Unvan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of suppliers">
-                          <td > {{item.sirket_adi}} </td>
-                          <!-- <td>{{item.ad}}</td>
-                          <td> {{item.soyad}} </td> -->
-                          <td> {{item.adres}} </td>
-                          <td> {{item.tel}} </td>
-                          <td> {{item.email}} </td>
-                          <td> {{item.vergi_dairesi}} </td>
-                          <td> {{item.vergi_no}} </td>
-                          <td> {{item.aciklama}} </td>
-                          <td> {{item.yetkili}} </td>
-                          <td> {{item.unvan}} </td>
-                        </tr>
-                      </tbody>
-                    </table>
-    
-    
-              </div>
-    
-          </div>
+      <div class="wrapper">
+        <div class="title">
+          TEDARİKÇİLER
+          <div class="line"></div>
         </div>
-      </div>
+        <div class="container">
+          <button (click)="openSupplier(supplier)" class="btn btn-success" style="float: left;width: 50px;height: 50px;"><i class="fa-solid fa-plus"></i></button>
+          
+          <div class="table">
+            <div class="search" style="margin-bottom: 3rem;">
+                <app-search-bar></app-search-bar>
+            </div>
+            <table cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th scope="col">Şirket Adı</th>
+                  <!-- <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th> -->
+                  <th scope="col">Adres</th>
+                  <th scope="col">Telefon</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Vergi Dairesi</th>
+                  <th scope="col">Vergi No</th>
+                  <th scope="col">Açıklama</th>
+                  <th scope="col">Yetkili Kişi</th>
+                  <th scope="col">Unvan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of suppliers">
+                  <td > {{item.sirket_adi}} </td>
+                  <!-- <td>{{item.ad}}</td>
+                  <td> {{item.soyad}} </td> -->
+                  <td> {{item.adres}} </td>
+                  <td> {{item.tel}} </td>
+                  <td> {{item.email}} </td>
+                  <td> {{item.vergi_dairesi}} </td>
+                  <td> {{item.vergi_no}} </td>
+                  <td> {{item.aciklama}} </td>
+                  <td> {{item.yetkili}} </td>
+                  <td> {{item.unvan}} </td>
+                  <!-- <td><i (click)="edit(project);$event.stopPropagation();"  style="cursor: pointer;" class="fa-solid fa-pen-to-square"></i><i (click)="deleteProjects(item.proje_id);$event.stopPropagation();" style="margin-left: 15%;cursor:pointer" class="fa-solid fa-trash"></i></td> -->
+                </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+
+
       
       
         <ng-template #supplier>

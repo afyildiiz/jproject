@@ -1,10 +1,7 @@
-
-  <button (click)="openProject(project)" class="btn btn-success" style="float: right; width: 50px;"><i class="fa-solid fa-file-circle-plus"></i></button>
-  <!-- <button  [routerLink]="['/login']" class="btn btn-danger" style="float: left; border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-circle-left"></i></button> -->
-
+<!-- <button  [routerLink]="['/login']" class="btn btn-danger" style="float: left; border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-circle-left"></i></button> -->
 
 <!--  GUNCELLEME BUTONUYLA  COMPONENT ACILACAK. EKLEMEK İCİN MODAL GELIYOR TAMAMDIR. SATIRIN ÜSTÜNE BASINCA İTEMLER GELECEK -->
-  <ul  class="responsive-table">
+<!-- <ul  class="responsive-table">
     <li style="margin-top: 60px;" class="table-header">
       <div class="col col-2">Proje</div>
       <div class="col col-1">Firma Adi</div>
@@ -23,128 +20,246 @@
       <div class="col col-2" > {{item.proje_basla|date:"shortDate"}} </div>
       <div class="col col-2" > {{item.proje_bitis|date:"shortDate"}} </div>
       <div class="col col-2" > {{item.maliyet}} </div>
-                                           <!-- [routerLink]="['/pupdate']"  -->
       <div class="col col-2" > <i (click)="edit(project);$event.stopPropagation();"  style="cursor: pointer;" class="fa-solid fa-pen-to-square"></i><i (click)="deleteProjects(item.proje_id);$event.stopPropagation();" style="margin-left: 15%;cursor:pointer" class="fa-solid fa-trash"></i></div>
     </li>
-  </ul>
+  </ul> -->
 
+<div class="wrapper">
+  <div class="title">
+    PROJELER
+    <div class="line"></div>
+  </div>
+  <div class="container">
+    <button
+      (click)="openProject(project)"
+      class="btn btn-success"
+      style="float: left; width: 50px; height: 50px; margin-bottom: 1rem"
+    >
+      <i class="fa-solid fa-file-circle-plus"></i>
+    </button>
+
+    <div class="table">
+      <div class="search" style="margin-bottom: 3rem">
+        <app-search-bar></app-search-bar>
+      </div>
+      <table cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th scope="col">Proje</th>
+            <th scope="col">Kurum</th>
+            <th scope="col">Durum</th>
+            <th scope="col">Yetk. Müş.</th>
+            <th scope="col">Proje Baş.</th>
+            <th scope="col">Proje Bit.</th>
+            <th scope="col">Fiyat</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of projects" (click)="open(savedItems)">
+            <td>{{ item.proje_adi }}</td>
+            <td>{{ item.firma_adi }}</td>
+            <td>{{ item.durum }}</td>
+            <td>{{ item.must_yet_kisi }}</td>
+            <td>{{ item.proje_basla | date : "shortDate" }}</td>
+            <td>{{ item.proje_bitis | date : "shortDate" }}</td>
+            <td>{{ item.maliyet }}</td>
+            <td>
+              <i
+                (click)="edit(project); $event.stopPropagation()"
+                style="cursor: pointer"
+                class="fa-solid fa-pen-to-square"
+              ></i
+              ><i
+                (click)="
+                  deleteProjects(item.proje_id); $event.stopPropagation()
+                "
+                style="margin-left: 15%; cursor: pointer"
+                class="fa-solid fa-trash"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <ng-template #project>
   <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
-        <div class="col-xl-9 col-lg-10 col-md-11 col-12 text-center">
-          <div style="display:flex;justify-content:center;margin-bottom: 2rem;" class="modal-header">
-            <h3 >Proje Ekle</h3>
-          <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;padding: 24px;" (click)="closeItem()"></button>
-
-          </div>
-          <form class="form-card" [formGroup]="projectForm">
-            <div class="row justify-content-between text-left">
-                <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Yetkili Kişi<span class="text-danger"> *</span></label><input formControlName="yetkili" type="text">
-              </div> -->
-                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Firma Adi<span class="text-danger"> *</span></label> <input formControlName="firma_adi" type="text" > </div>
-                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Müşteri Yetkili Kişi<span class="text-danger"> *</span></label>
-                  <select formControlName="must_yet_kisi" style="margin-top: 3%;" class="form-select" name="" id="">
-                      <option value="" disabled selected></option>
-                      <option *ngFor="let item of musteriCombobox" value="musteri" [value]="item.ad"> {{item.ad+" "+item.soyad}} </option>
-                    </select>
-                   </div>
-            </div>
-            <div class="row justify-content-between text-left">
-                <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Şehir<span class="text-danger"> *</span></label> <input formControlName="sehir" type="text" > </div> -->
-
-            </div>
-            <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Proje Adi<span class="text-danger"> *</span></label> <input formControlName="proje_adi" type="text" > </div>
-                <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Proje Fiyatı <span class="text-danger"> *</span></label> <input formControlName="maliyet" type="text" pattern="\d+(\.\d{2})?"> </div>
-
-            </div>
-            <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Proje Başlangic<span class="text-danger"> *</span></label> <input formControlName="proje_basla" type="date" > </div>
-                <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Proje Bitiş<span class="text-danger"> *</span></label> <input formControlName="proje_bitis" type="date"></div>
-            </div>
-            <div class="row justify-content-between text-left">
-                <!-- <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Aciklama <span class="text-danger"> *</span></label> <textarea formControlName="aciklama" name="" id="" cols="30" rows="3"></textarea> </div> -->
-                <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Durum<span class="text-danger"> *</span></label>
-                  <select formControlName="durum" style="margin-top: 3%;" class="form-select" name="" id="">
-                    <option value="" disabled selected></option>
-                    <option value="Yeni" >Yeni</option>
-                    <option value="Çalışılıyor" >Çalışılıyor</option>
-                    <option value="Bekliyor" >Bekliyor</option>
-                    <option value="Müşteri Bekleniyor" >Müşteri Bekleniyor</option>
-                    <option value="Tamamlandı" >Tamamlandı</option>
-                  </select>
-              </div>
-
-            </div>
-            <div class="row justify-content-end">
-                <div class="form-group col-sm-6"> <button type="button" (click)="saveProject()" class="btn-block btn-primary">Submit</button> </div>
-            </div>
-        </form>
+      <div class="col-xl-9 col-lg-10 col-md-11 col-12 text-center">
+        <div
+          style="display: flex; justify-content: center; margin-bottom: 2rem"
+          class="modal-header"
+        >
+          <h3>Proje Ekle</h3>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            style="width: 30px; height: 30px; padding: 24px"
+            (click)="closeItem()"
+          ></button>
         </div>
-    </div>
-</div>
-  </ng-template>
-
-
-
-  <ng-template #savedItems let-modal>
-    <div class="container">
-                      
-                                
-      <div class="row">
-      <div class="col-12">
-          <div class="card">
-              <div class="card-body text-center">
-                <div class="modal-title">
-                  <h4 class="modal-title">BORU HATTI projesine ait itemler</h4>
-                </div>
-              </div>
-                  <div class="table-responsive">
-                      <table class="table">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th>
-                                      <label class="customcheckbox m-b-20">
-                                          <input type="checkbox" id="mainCheckbox">
-                                          <span class="checkmark"></span>
-                                      </label>
-                                  </th>
-                                  <th scope="col">Country</th>
-                                  <th scope="col">Browser</th>
-                                  <th scope="col">Platform(s)</th>
-                                  <th scope="col">Engine version</th>
-                              </tr>
-                          </thead>
-                          <tbody class="customtable">
-                              <tr>
-                                  <th>
-                                      <label class="customcheckbox">
-                                          <input type="checkbox" class="listCheckbox">
-                                          <span class="checkmark"></span>
-                                      </label>
-                                  </th>
-                                  <td>India</td>
-                                  <td>Chrome OS</td>
-                                  <td>MAC OS</td>
-                                  <td>76</td>
-                              </tr>
- 
-                          </tbody>
-                      </table>
-                  </div>
+        <form class="form-card" [formGroup]="projectForm">
+          <div class="row justify-content-between text-left">
+            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Yetkili Kişi<span class="text-danger"> *</span></label><input formControlName="yetkili" type="text">
+              </div> -->
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Firma Adi<span class="text-danger"> *</span></label
+              >
+              <input formControlName="firma_adi" type="text" />
+            </div>
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
+              >
+              <select
+                formControlName="must_yet_kisi"
+                style="margin-top: 3%"
+                class="form-select"
+                name=""
+                id=""
+              >
+                <option value="" disabled selected></option>
+                <option
+                  *ngFor="let item of musteriCombobox"
+                  value="musteri"
+                  [value]="item.ad"
+                >
+                  {{ item.ad + " " + item.soyad }}
+                </option>
+              </select>
+            </div>
           </div>
+          <div class="row justify-content-between text-left">
+            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Şehir<span class="text-danger"> *</span></label> <input formControlName="sehir" type="text" > </div> -->
+          </div>
+          <div class="row justify-content-between text-left">
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Proje Adi<span class="text-danger"> *</span></label
+              >
+              <input formControlName="proje_adi" type="text" />
+            </div>
+            <div class="form-group col-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Proje Fiyatı <span class="text-danger"> *</span></label
+              >
+              <input
+                formControlName="maliyet"
+                type="text"
+                pattern="\d+(\.\d{2})?"
+              />
+            </div>
+          </div>
+          <div class="row justify-content-between text-left">
+            <div class="form-group col-sm-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Proje Başlangic<span class="text-danger"> *</span></label
+              >
+              <input formControlName="proje_basla" type="date" />
+            </div>
+            <div class="form-group col-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Proje Bitiş<span class="text-danger"> *</span></label
+              >
+              <input formControlName="proje_bitis" type="date" />
+            </div>
+          </div>
+          <div class="row justify-content-between text-left">
+            <!-- <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Aciklama <span class="text-danger"> *</span></label> <textarea formControlName="aciklama" name="" id="" cols="30" rows="3"></textarea> </div> -->
+            <div class="form-group col-6 flex-column d-flex">
+              <label class="form-control-label px-3"
+                >Durum<span class="text-danger"> *</span></label
+              >
+              <select
+                formControlName="durum"
+                style="margin-top: 3%"
+                class="form-select"
+                name=""
+                id=""
+              >
+                <option value="" disabled selected></option>
+                <option value="Yeni">Yeni</option>
+                <option value="Çalışılıyor">Çalışılıyor</option>
+                <option value="Bekliyor">Bekliyor</option>
+                <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
+                <option value="Tamamlandı">Tamamlandı</option>
+              </select>
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="form-group col-sm-6">
+              <button
+                type="button"
+                (click)="saveProject()"
+                class="btn-block btn-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-  </div>
-
-     </div> 
-  </ng-template>
-
-
-  <ng-template #detail>
-    <div class="modal-header">
-      <!-- <h4 ngbPopover="{{selectedTask.title}}" triggers="mouseenter:mouseleave" class="modal-title" id="modal-basic-title">
-        {{selectedTask.title?.split("\"").join("\'")}}</h4> -->
-        <h4>BAŞLIK </h4>
     </div>
-  </ng-template>
+  </div>
+</ng-template>
+
+<ng-template #savedItems let-modal>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="modal-title">
+              <h4 class="modal-title">BORU HATTI projesine ait itemler</h4>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>
+                    <label class="customcheckbox m-b-20">
+                      <input type="checkbox" id="mainCheckbox" />
+                      <span class="checkmark"></span>
+                    </label>
+                  </th>
+                  <th scope="col">Country</th>
+                  <th scope="col">Browser</th>
+                  <th scope="col">Platform(s)</th>
+                  <th scope="col">Engine version</th>
+                </tr>
+              </thead>
+              <tbody class="customtable">
+                <tr>
+                  <th>
+                    <label class="customcheckbox">
+                      <input type="checkbox" class="listCheckbox" />
+                      <span class="checkmark"></span>
+                    </label>
+                  </th>
+                  <td>India</td>
+                  <td>Chrome OS</td>
+                  <td>MAC OS</td>
+                  <td>76</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #detail>
+  <div class="modal-header">
+    <!-- <h4 ngbPopover="{{selectedTask.title}}" triggers="mouseenter:mouseleave" class="modal-title" id="modal-basic-title">
+        {{selectedTask.title?.split("\"").join("\'")}}</h4> -->
+    <h4>BAŞLIK</h4>
+  </div>
+</ng-template>

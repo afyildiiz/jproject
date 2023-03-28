@@ -13,6 +13,8 @@ import { ProjeUpdateComponent } from './components/proje-update/proje-update.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LeftbarComponent,
     HomeComponent,
     ProjeUpdateComponent,
+    SearchBarComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
