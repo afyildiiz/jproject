@@ -162,11 +162,11 @@
           <div class="card-body cleartfix">
             <h4 style="text-align: center;">En Son Kullanılan</h4>
             <hr>
-            <ul>
-              <li *ngFor="let component of recentComponents">
+            <div style="text-align:center">
+              <div *ngFor="let component of recentComponents">
                 <a style="font-family: 'Inconsolata', monospace;" [routerLink]="['/', component.toLowerCase()]">{{ component }}</a>
-              </li>
-            </ul>
+              </div>
+            </div>
             <!-- son kullanılan sekme -->
 
           </div>
