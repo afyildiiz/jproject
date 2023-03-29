@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { Routes, RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule,
+
 
   ],
   providers: [],

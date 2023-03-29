@@ -13,10 +13,25 @@ import { baseUrl } from '../utils/baseUrl';
 })
 export class TaskService {
 
+  recentlyViewedComponents: string[] = [];
+
+  addRecentlyViewedComponent(componentName: any): void {
+    if (this.recentlyViewedComponents.length >= 3) {
+      this.recentlyViewedComponents.shift();
+    }
+    this.recentlyViewedComponents.push(componentName);
+  }
+
+  getRecentlyViewedComponents(): string[] {
+    return this.recentlyViewedComponents;
+  }
+
+
+  
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "64581211373422586363"
+    return "64836817747844238387"
     // return localStorage.getItem('token')
   }
 
@@ -211,17 +226,23 @@ export class TaskService {
   }
 
 
-  getCount() {
-    const body = {
-      "Token": this.getToken(),
-      "DataStoreId": "35612368858558141732",
-      "Operation": "read",
-      "Data": `select proje_adi from "postgres".public.j_pipeline`
+
+
+
+  getLastProject(){
+    const body={
+      Token:this.getToken(),
+      DataStoreId:'87162637677132734427',
+      Operation:'read',
+      Encrypted:1951,
+      Data:'SELECT * FROM "postgres".public.j_pipeline ORDER BY proje_id DESC LIMIT 3 OFFSET 0'
     }
-    return this.http.post(baseUrl + 'Applications/DataOps', body).pipe(
-      map((response: any) => {
-        return response.message
-      })
-    );
+    return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
+      return response.message
+    }))
   }
 }
+
+
+
+

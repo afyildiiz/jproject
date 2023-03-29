@@ -86,180 +86,143 @@
 </div>
 
 <ng-template #project>
-  <div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-      <div class="col-xl-9 col-lg-10 col-md-11 col-12 text-center">
-        <div
-          style="display: flex; justify-content: center; margin-bottom: 2rem"
-          class="modal-header"
+  <div class="wrapp">
+    <div class="form">
+        <h1 class="title">Proje Ekle</h1>
+        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()"></button>
+        <form [formGroup]="projectForm" class="myform">
+            <div class="control-from">
+                <label for="firstname">Proje Adi</label>
+                <input type="text" formControlName="proje_adi" id="firstname" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="lastname">Kurum Adi</label>
+                <input type="text" formControlName="firma_adi" id="lastname" value="" required>
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Durum<span class="text-danger"> *</span></label
+      >
+      <select
+        formControlName="durum"
+        style="margin-top: 3%"
+        class="form-select"
+        name=""
+        id=""
+      >
+        <option value="" disabled selected></option>
+        <option value="Yeni">Yeni</option>
+        <option value="Çalışılıyor">Çalışılıyor</option>
+        <option value="Bekliyor">Bekliyor</option>
+        <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
+        <option value="Tamamlandı">Tamamlandı</option>
+      </select>
+
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
+      >
+      <select
+        formControlName="must_yet_kisi"
+        style="margin-top: 3%"
+        class="form-select"
+        name=""
+        id=""
+      >
+        <option value="" disabled selected></option>
+        <option
+          *ngFor="let item of musteriCombobox"
+          value="musteri"
+          [value]="item.ad"
         >
-          <h3>Proje Ekle</h3>
-          <button
-            type="button"
-            class="btn-close"
-            aria-label="Close"
-            style="width: 30px; height: 30px; padding: 24px"
-            (click)="closeItem()"
-          ></button>
-        </div>
-        <form class="form-card" [formGroup]="projectForm">
-          <div class="row justify-content-between text-left">
-            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Yetkili Kişi<span class="text-danger"> *</span></label><input formControlName="yetkili" type="text">
-              </div> -->
-            <div class="form-group col-sm-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Firma Adi<span class="text-danger"> *</span></label
-              >
-              <input formControlName="firma_adi" type="text" />
+          {{ item.ad + " " + item.soyad }}
+        </option>
+      </select>
+
             </div>
-            <div class="form-group col-sm-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
-              >
-              <select
-                formControlName="must_yet_kisi"
-                style="margin-top: 3%"
-                class="form-select"
-                name=""
-                id=""
-              >
-                <option value="" disabled selected></option>
-                <option
-                  *ngFor="let item of musteriCombobox"
-                  value="musteri"
-                  [value]="item.ad"
-                >
-                  {{ item.ad + " " + item.soyad }}
-                </option>
-              </select>
+
+            <div class="full-width">
+                <label for="basla">Proje Başlama Tarihi</label>
+                <input type="date" formControlName="proje_basla" id="basla" value="" required>
             </div>
-          </div>
-          <div class="row justify-content-between text-left">
-            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Şehir<span class="text-danger"> *</span></label> <input formControlName="sehir" type="text" > </div> -->
-          </div>
-          <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Proje Adi<span class="text-danger"> *</span></label
-              >
-              <input formControlName="proje_adi" type="text" />
+
+            <div class="control-from">
+                <label for="bitis">Proje Bitiş Tarihi</label>
+                <input type="date" formControlName="proje_bitis" id="bitis" value="" required>
             </div>
-            <div class="form-group col-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Proje Fiyatı <span class="text-danger"> *</span></label
-              >
-              <input
-                formControlName="maliyet"
-                type="text"
-                pattern="\d+(\.\d{2})?"
-              />
+
+            <div class="control-from">
+                <label for="fiyat">Proje Fiyati </label>
+                <input type="text" formControlName="maliyet" id="fiyat" value="" required>
             </div>
-          </div>
-          <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Proje Başlangic<span class="text-danger"> *</span></label
-              >
-              <input formControlName="proje_basla" type="date" />
+
+            <div class="control-from">
+                <label for="isk">Proje'ye Ait İş Kalemleri </label>
+                <input type="text" formControlName="is_kalemi" id="isk" value="" required>
             </div>
-            <div class="form-group col-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Proje Bitiş<span class="text-danger"> *</span></label
-              >
-              <input formControlName="proje_bitis" type="date" />
+
+            <div class="button">
+                <button (click)="saveProject()"  id="kaydet">Kaydet</button>
             </div>
-          </div>
-          <div class="row justify-content-between text-left">
-            <!-- <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Aciklama <span class="text-danger"> *</span></label> <textarea formControlName="aciklama" name="" id="" cols="30" rows="3"></textarea> </div> -->
-            <div class="form-group col-6 flex-column d-flex">
-              <label class="form-control-label px-3"
-                >Durum<span class="text-danger"> *</span></label
-              >
-              <select
-                formControlName="durum"
-                style="margin-top: 3%"
-                class="form-select"
-                name=""
-                id=""
-              >
-                <option value="" disabled selected></option>
-                <option value="Yeni">Yeni</option>
-                <option value="Çalışılıyor">Çalışılıyor</option>
-                <option value="Bekliyor">Bekliyor</option>
-                <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
-                <option value="Tamamlandı">Tamamlandı</option>
-              </select>
-            </div>
-          </div>
-          <div class="row justify-content-end">
-            <div class="form-group col-sm-6">
-              <button
-                type="button"
-                (click)="saveProject()"
-                class="btn-block btn-primary"
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+
         </form>
-      </div>
     </div>
-  </div>
+</div>
 </ng-template>
 
 <ng-template #savedItems let-modal>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body text-center">
-            <div class="modal-title">
-              <h4 class="modal-title">BORU HATTI projesine ait itemler</h4>
+  <main>
+        
+    <!--MDB Tables-->
+    <div class="mt-4">
+
+        <div class=" mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">... Projesine Kayıtlı İş Kalemleri</h2>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th>
-                    <label class="customcheckbox m-b-20">
-                      <input type="checkbox" id="mainCheckbox" />
-                      <span class="checkmark"></span>
-                    </label>
-                  </th>
-                  <th scope="col">Country</th>
-                  <th scope="col">Browser</th>
-                  <th scope="col">Platform(s)</th>
-                  <th scope="col">Engine version</th>
-                </tr>
-              </thead>
-              <tbody class="customtable">
-                <tr>
-                  <th>
-                    <label class="customcheckbox">
-                      <input type="checkbox" class="listCheckbox" />
-                      <span class="checkmark"></span>
-                    </label>
-                  </th>
-                  <td>India</td>
-                  <td>Chrome OS</td>
-                  <td>MAC OS</td>
-                  <td>76</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+        </div>
+        </main>
 </ng-template>
 
-<ng-template #detail>
-  <div class="modal-header">
-    <!-- <h4 ngbPopover="{{selectedTask.title}}" triggers="mouseenter:mouseleave" class="modal-title" id="modal-basic-title">
-        {{selectedTask.title?.split("\"").join("\'")}}</h4> -->
-    <h4>BAŞLIK</h4>
-  </div>
-</ng-template>
+<!-- <ng-template #projectupdate let-modal>
+<app-proje-update [project]="selectedProject"></app-proje-update>
+</ng-template> -->

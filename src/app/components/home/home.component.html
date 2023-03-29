@@ -9,12 +9,12 @@
     <div class="row">
 
       <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card"  [routerLink]="['/supplier']">
+        <div class="card pointer"  [routerLink]="['/supplier']">
           <div class="card-content">
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="warning">156</h3>
+                  <h3 class="warning"> {{supplierCount}} </h3>
                   <span> <b> Kayıtlı Tedarikçiler</b></span>
                 </div>
                 <div class="align-self-center">
@@ -28,12 +28,12 @@
       </div>
   
       <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card" [routerLink]="['/item']">
+        <div class="card pointer" [routerLink]="['/item']">
           <div class="card-content">
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="success">64</h3>
+                  <h3 class="success"> {{itemCount}} </h3>
                   <span><b> Kayıtlı İş Kalemleri</b></span>
                 </div>
                 <div class="align-self-center">
@@ -47,12 +47,12 @@
       </div>
 
       <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card" [routerLink]="['/customer']">
+        <div class="card pointer" [routerLink]="['/customer']">
           <div class="card-content">
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="danger">423</h3>
+                  <h3 class="danger"> {{customerCount}} </h3>
                   <span><b>Kayıtlı Müşteriler </b></span>
                 </div>
                 <div class="align-self-center">
@@ -67,12 +67,12 @@
       </div>
 
       <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card" [routerLink]="['/project']">
+        <div class="card pointer" [routerLink]="['/project']">
           <div class="card-content">
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="primary">278</h3>
+                  <h3 class="primary"> {{projectCount}} </h3>
                   <span> <b> Kayıtlı Projeler</b></span>
                 </div>
                 <div class="align-self-center">
@@ -123,13 +123,15 @@
             <thead>
               <tr>
                 <th scope="col">Proje Adı</th>
-                <th scope="col">Açıklama</th>
+                <th scope="col">Proje Başla</th>
+                <th scope="col">Proje Bitiş</th>
               </tr>
             </thead>
             <tbody>
-              <tr >
-                <td>adsaada</td>
-                <td>asdsdadd</td>
+              <tr *ngFor="let item of projects">
+                <td> {{item.proje_adi}} </td>
+                <td> {{item.proje_basla|date:"shortDate"}} </td>
+                <td> {{item.proje_bitis|date:"shortDate"}} </td>
               </tr>
             </tbody>
           </table>
@@ -160,6 +162,12 @@
           <div class="card-body cleartfix">
             <h4 style="text-align: center;">En Son Kullanılan</h4>
             <hr>
+            <ul>
+              <li *ngFor="let component of recentComponents">
+                <a style="font-family: 'Inconsolata', monospace;" [routerLink]="['/', component.toLowerCase()]">{{ component }}</a>
+              </li>
+            </ul>
+            <!-- son kullanılan sekme -->
 
           </div>
         </div>

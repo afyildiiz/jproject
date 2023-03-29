@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Pipe } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pipeline } from 'src/app/pipeline';
@@ -12,10 +12,13 @@ import { ProjeUpdateComponent } from '../proje-update/proje-update.component';
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit {
-  
+  // @Input() project!:Pipeline
+  // selectedProject!:Pipeline
+
   @Output() lengthEvent:any=new EventEmitter()
   @Output() sendLength=new EventEmitter<number>()
 
+	placement = 'bottom';
 
 projects:Pipeline[]=[]
 projectForm!:FormGroup
@@ -32,12 +35,16 @@ data:Pipeline={
   // aciklama: '',
   durum: '',
   maliyet: 0,
-  proje_id: 0
+  proje_id: 0,
+  is_kalemi:''
 }
-constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
+constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
 
 
   ngOnInit(): void {
+    this.task.addRecentlyViewedComponent(this.constructor.name);
+
+
         // this.getLength()
         this.getProject();
         this.getComboboxNames();
@@ -48,7 +55,8 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
           proje_basla:['',Validators.required],
           proje_bitis:['',Validators.required],
           durum:['',Validators.required],
-          maliyet:['',Validators.required]
+          maliyet:['',Validators.required],
+          is_kalemi:['',Validators.required]
           // aciklama:['',Validators.required],
           // sehir:['',Validators.required],
           // yetkili:['',Validators.required],
@@ -61,16 +69,12 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
   openProject(savedItems:any){
     this.modal.open(savedItems,{size:'lg',centered:true})
   }
-  closeItem(){
-    this.modal.dismissAll()
-  }
 
 
   getProject(){
     this.task.getProjects().subscribe((res:any)=>{
       console.log(res)
       this.projects=res;
-      return this.sendLength.emit(this.projects.length)
       
     })
   }
@@ -89,6 +93,8 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
     }else{
       alert("boslukları doldurun")
     }
+  this.modal.dismissAll()
+
   }
 
   // deleteProject(id:any){
@@ -143,7 +149,7 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
 
 
   edit(project: any) {
-    const modalRef = this.modal.open(ProjeUpdateComponent,{ windowClass:'custom-modal'});
+    const modalRef = this.modal.open(ProjeUpdateComponent,{ size:'lg',centered:true});
     modalRef.componentInstance.projects = project;
   }
 

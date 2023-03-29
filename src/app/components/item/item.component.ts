@@ -13,17 +13,19 @@ export class ItemComponent implements OnInit {
   component='hometable'
   musteri = 'AYKUT GUVEN';
   proje = 'XXXXXXX';
-  // items:Item[]=[]
-  // @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  
   items:Item[]=[]
 
   itemForm!:FormGroup
-  constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskService) {}
+  constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) {}
 
 
   ngOnInit(): void {
+    this.task.addRecentlyViewedComponent(this.constructor.name);
+
+    
     this.getItem();
+
 
     this.itemForm=this.fb.group({
       item_adi:['',Validators.required],
@@ -62,6 +64,8 @@ export class ItemComponent implements OnInit {
     }else{
       alert("boslukları doldurun")
     }
+  this.modal.dismissAll()
+
   }
 
 }

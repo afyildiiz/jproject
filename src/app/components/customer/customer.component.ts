@@ -20,9 +20,12 @@ export class CustomerComponent implements OnInit {
   //   {sirket_adi:"JENERATORCU",ad:"fatih",soyad:"yildiz",adres:"İstanbul,beykoz,hüviyet sk. no:3",tel:"05555555555",email:"afyildiz@gmail.com",vergi_dairesi:"Beykoz vergi dairesi",vergi_no:111111,aciklama:"boş",yetkili:"Fatih Yildiz"},
   //   {sirket_adi:"KABLO SIRKETI",ad:"Hüseyin",soyad:"Tan",adres:"İstanbul,sultanbeyli,aaaaa sk. no:55",tel:"05555555555",email:"huseyintan@gmail.com",vergi_dairesi:"Sultanbeyli vergi dairesi",vergi_no:121212121,aciklama:"boş",yetkili:"Hüseyin Tan"},
   // ]
-  constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
+  constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
 
   ngOnInit(): void {
+    this.task.addRecentlyViewedComponent(this.constructor.name);
+
+
     this.getCustomer();
 
     this.customerForm=this.fb.group({
@@ -64,6 +67,7 @@ export class CustomerComponent implements OnInit {
   }else{
     alert("Boşlukları doldurun!")
   }
+  this.modal.dismissAll()
   }
 
   deleteCustomer(id:any){

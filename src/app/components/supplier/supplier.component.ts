@@ -18,10 +18,12 @@ export class SupplierComponent implements OnInit {
     // {sirket_adi:"FATİH JENERATOR",ad:"Selim",soyad:"Yeşilyurt",adres:"Istanbul,beykoz,hüviyet sk. no:3",tel:"05555555555",email:"afyildiz@gmail.com",vergi_dairesi:"Beykoz vergi dairesi",vergi_no:111111,aciklama:"boş",yetkili:"fatih"},
     // {sirket_adi:"AHMET JENERATOR ",ad:"Yavuz",soyad:"Aydoğan",adres:"Istanbul,sultanbeyli,aaaaa sk. no:55",tel:"05555555555",email:"huseyintan@gmail.com",vergi_dairesi:"Sultanbeyli vergi dairesi",vergi_no:121212121,aciklama:"boş",yetkili:"yildiz"}
   // ]
-  constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
+  constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
 
 
   ngOnInit(): void {
+    this.task.addRecentlyViewedComponent(this.constructor.name);
+
     this.getSupplier();
 
     this.supplierForm=this.fb.group({
@@ -47,9 +49,7 @@ export class SupplierComponent implements OnInit {
   openSupplier(supplier:any){
     this.modal.open(supplier,{size:'lg',centered:true})
   }
-  closeItem(){
-    this.modal.dismissAll()
-  }
+
   getSupplier(){
     this.task.getSuppliers().subscribe((res:any)=>{
       this.suppliers=res
@@ -66,5 +66,7 @@ export class SupplierComponent implements OnInit {
   }else{
     alert("boşlukları doldurunuz!")
   }
+  this.modal.dismissAll()
+
   }
 }

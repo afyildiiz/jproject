@@ -9,5 +9,6 @@ export interface Pipeline{
     // aciklama:string,
     durum:string,
     maliyet:number,
-    proje_id:number
+    proje_id:number,
+    is_kalemi:string
 }

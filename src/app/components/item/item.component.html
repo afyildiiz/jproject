@@ -94,62 +94,73 @@
   
 
 
-
-
-
-
-
-
-
-
     <ng-template #item>
-      <div class="container-fluid px-1 py-5 mx-auto">
-        <div class="row d-flex justify-content-center">
-            <div class="col-xl-7 col-lg-10 col-md-9 col-12 text-center">
-              <div style="display:flex;justify-content:center;margin-bottom: 2rem;" class="modal-header">
-                <h3 >İş Kalemi Ekle</h3>
-                <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px" (click)="closeItem()"></button>
-              </div>
-                    <form class="form-card" [formGroup]="itemForm">
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Item<span class="text-danger"> *</span></label> <input formControlName="item_adi" type="text"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Kategori<span class="text-danger"> *</span></label> <input formControlName="kategori" type="text" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Marka<span class="text-danger"> *</span></label> <input formControlName="marka" type="text" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Model<span class="text-danger"> *</span></label> <input formControlName="model" type="text" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Miktar/Birim<span class="text-danger"> *</span></label> <input formControlName="miktar_birim" type="text" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Maliyet<span class="text-danger"> *</span></label> <input formControlName="maliyet" type="text" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Durum<span class="text-danger"> *</span></label>
-                              <select formControlName="durum" style="margin-top: 3%;" class="form-select">
-                                <option value="" disabled selected></option>
-                                <option value="Stokta">Stokta</option>
-                                <option value="Stokta Yok">Stokta Yok</option>
-                                <option value="Taşıma Durumunda">Taşıma Durumunda</option>
-                                <option value="Sipariş Verildi">Sipariş Verildi</option>
-                              </select>
-                               </div>
-                            <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Tarih<span class="text-danger"> *</span></label> <input type="date" formControlName="tarih" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">Birim <span class="text-danger"> *</span></label>
-                            <select class="form-select" formControlName="birim" >
-                              <option value="" ></option>
-                              <option value="₺">₺</option>
-                              <option value="$">$</option>
-                              <option value="€">€</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="form-group col-sm-6"> <button type="submit" (click)="saveItem()" class="btn-block btn-primary">Request a demo</button> </div>
-                        </div>
-                    </form>
-            </div>
+      <div class="wrapp">
+        <div class="form">
+            <h1 class="title">İş Kalemi Ekle</h1>
+            <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()"></button>
+   
+            <form [formGroup]="itemForm" class="myform">
+                <div class="control-from">
+                    <label>Item Adi</label>
+                    <input type="text" formControlName="item_adi" value="" required>
+                </div>
+   
+                <div class="control-from">
+                    <label>Kategori</label>
+                    <input type="text" formControlName="kategori" value="" required>
+                </div>
+   
+                <div class="control-from">
+                    <label >Marka</label>
+                    <input type="text" formControlName="marka" value="" required>
+                </div>
+   
+                <div class="control-from">
+                    <label>Model</label>
+                    <input type="text" formControlName="model"  value="" required>
+                </div>
+   
+                <div class="full-width">
+                    <label >Miktar/Birim</label>
+                    <input type="text" formControlName="miktar_birim" value="" required>
+                </div>
+   
+                <div class="control-from">
+                  <label>Statü</label>
+                  <select formControlName="durum" style="margin-top: 3%;" class="form-select">
+                    <option value="Stokta">Stokta</option>
+                    <option value="Stokta Yok">Stokta Yok</option>
+                    <option value="Taşıma Durumunda">Taşıma Durumunda</option>
+                    <option value="Sipariş Verildi">Sipariş Verildi</option>
+                  </select>
+                </div>
+   
+                <div class="control-from">
+                    <label>Tarih </label>
+                    <input type="date" formControlName="tarih" value="" required>
+                </div>
+
+                <div class="control-from">
+                    <label >Maliyet </label>
+                    <input type="text" formControlName="maliyet"value="" required>
+                </div>
+
+                <div class="control-from">
+                  <label>Birim</label>
+                  <select class="form-select" formControlName="birim" >
+                    <option value="₺">₺</option>
+                    <option value="$">$</option>
+                    <option value="€">€</option>
+                  </select>
+                </div>
+   
+                <div class="button">
+                    <button (click)="saveItem()" id="register">Kaydet</button>
+                </div>
+   
+            </form>
         </div>
     </div>
+
       </ng-template>
