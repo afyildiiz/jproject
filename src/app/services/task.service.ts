@@ -31,7 +31,7 @@ export class TaskService {
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "64836817747844238387"
+    return "53452856783148648325"
     // return localStorage.getItem('token')
   }
 
@@ -191,7 +191,7 @@ export class TaskService {
       DataStoreId:"62723767246517453585",
       Operation:"delete",
       Encrypted:1951,
-      Data:`delete from "postgres".public.j_item where proje_id='${id}'`
+      Data:`delete from "postgres".public.j_item where item_id='${id}'`
     }
     return this.http.post(baseUrl + 'Applications/DataOps', body)
   }

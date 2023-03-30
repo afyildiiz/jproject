@@ -25,6 +25,7 @@
                   <th scope="col">Açıklama</th>
                   <th scope="col">Yetkili Kişi</th>
                   <th scope="col">Unvan</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -40,6 +41,20 @@
                   <td> {{item.aciklama}} </td>
                   <td> {{item.yetkili}} </td>
                   <td> {{item.unvan}} </td>
+                  <td>
+                    <i
+                      (click)="edit(); $event.stopPropagation()"
+                      style="cursor: pointer"
+                      class="fa-solid fa-pen-to-square"
+                    ></i>
+                    <i
+                      (click)="
+                        deleteSupplier(item.tedarikci_id);
+                      "
+                      style="margin-left: 15%; cursor: pointer"
+                      class="fa-solid fa-trash"
+                    ></i>
+                  </td>
                   <!-- <td><i (click)="edit(project);$event.stopPropagation();"  style="cursor: pointer;" class="fa-solid fa-pen-to-square"></i><i (click)="deleteProjects(item.proje_id);$event.stopPropagation();" style="margin-left: 15%;cursor:pointer" class="fa-solid fa-trash"></i></td> -->
                 </tr>
     </tbody>

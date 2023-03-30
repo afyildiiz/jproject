@@ -42,8 +42,18 @@
                         <td> {{item.yetkili}} </td>
                         <td> {{item.unvan}} </td>
                         <td>
-                          <!-- <i (click)="edit(project);$event.stopPropagation();"  style="cursor: pointer;" class="fa-solid fa-pen-to-square"></i> -->
-                          <i (click)="deleteCustomer(item.id)" style="margin-left: 15%;cursor:pointer" class="fa-solid fa-trash"></i>
+                          <i
+                            (click)="openUpdateCustomer()"
+                            style="cursor: pointer"
+                            class="fa-solid fa-pen-to-square"
+                          ></i>
+                          <i
+                            (click)="
+                              deleteCustomer(item.id);
+                            "
+                            style="margin-left: 15%; cursor: pointer"
+                            class="fa-solid fa-trash"
+                          ></i>
                         </td>
                       </tr>
           </tbody>

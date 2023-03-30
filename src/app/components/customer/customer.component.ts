@@ -5,6 +5,7 @@ import { Customer } from 'src/app/customer';
 
 import { TaskService } from 'src/app/services/task.service';
 import Swal from 'sweetalert2';
+import { CustomerUpdateComponent } from '../customer-update/customer-update.component';
 
 @Component({
   selector: 'app-customer',
@@ -51,6 +52,11 @@ export class CustomerComponent implements OnInit {
   closeCustomer(){
     this.modal.dismissAll()
   }
+
+  openUpdateCustomer(){
+    this.modal.open(CustomerUpdateComponent,{size:'lg',centered:true})
+  }
+
   getCustomer(){
     this.task.getCustomers().subscribe((res:any)=>{
       this.customers=res;

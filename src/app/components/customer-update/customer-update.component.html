@@ -1,0 +1,69 @@
+<div class="wrapp">
+    <div class="form">
+        <h1 class="title">Müşteri Bilgilerini Güncelle</h1>
+        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()"></button>
+        
+        <form [formGroup]="customerForm" class="myform">
+
+            <div class="control-from">
+                <label for="lastname">Ad</label>
+                <input type="text" formControlName="ad" id="lastname" value="" required>
+            </div>
+
+            <div class="control-from">
+              <label for="emailaddress">Soyad</label>
+              <input type="text" formControlName="soyad" id="emailaddress" value="" required>
+          </div>
+
+            <div class="control-from">
+              <label for="firstname">Şirket Adı</label>
+              <input type="text" formControlName="sirket_adi" id="firstname" value="" required>
+          </div>
+
+            <div class="control-from">
+                <label for="phonenumber">Adres</label>
+                <input type="text" formControlName="adres" id="phonenumber" value="" required>
+            </div>
+
+            <div class="full-width">
+                <label for="companyname">Telefon</label>
+                <input type="tel" formControlName="tel" id="companyname" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="businesscategory">E-mail</label>
+                <input type="email" formControlName="email" id="businesscategory" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="location">Vergi Dairesi </label>
+                <input type="text" formControlName="vergi_dairesi" id="location" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="location">Vergi Numarası </label>
+                <input type="text" formControlName="vergi_no" id="location" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="location">Açıklama </label>
+                <textarea type="text" formControlName="aciklama" id="location" value="" required></textarea>
+            </div>
+
+            <div class="control-from">
+                <label for="location">Yetkili </label>
+                <input type="text" formControlName="yetkili" id="location" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="location">Unvan </label>
+                <input type="text" formControlName="unvan" id="location" value="" required>
+            </div>
+
+            <div class="button">
+                <button  id="register">Güncelle</button>
+            </div>
+
+        </form>
+    </div>
+</div>

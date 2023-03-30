@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Supplier } from 'src/app/supplier';
 import { TaskService } from 'src/app/services/task.service';
+import Swal from 'sweetalert2';
+import { SupplierUpdateComponent } from '../supplier-update/supplier-update.component';
 
 @Component({
   selector: 'app-supplier',
@@ -68,5 +70,32 @@ export class SupplierComponent implements OnInit {
   }
   this.modal.dismissAll()
 
+  }
+  deleteSupplier(id:any){
+    Swal.fire({
+      icon: 'question',
+      title: 'Kayıt Silinecek!',
+      text: 'Bu tedarikçi kaydını silmek istediğinize emin misiniz?',
+      showCancelButton: true,
+      confirmButtonText: 'Evet',
+      denyButtonText: 'Vazgeç',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.task.deleteSuppliers(id).subscribe(res => {
+          if (res == 'Success')
+            Swal.fire('Proje başarıyla silindi!', '', 'success')
+          else if (result.dismiss===Swal.DismissReason.cancel)
+        {
+            Swal.fire('Bir Hata Oluştu!', '', 'success')
+        }
+        this.getSupplier()
+
+        })
+      }
+    })
+  }
+
+  edit(){
+    this.modal.open(SupplierUpdateComponent,{size:'lg',centered:true})
   }
 }

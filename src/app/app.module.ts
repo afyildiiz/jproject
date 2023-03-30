@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { Routes, RouterModule } from '@angular/router';
+import { CustomerUpdateComponent } from './components/customer-update/customer-update.component';
+import { ItemUpdateComponent } from './components/item-update/item-update.component';
+import { SupplierUpdateComponent } from './components/supplier-update/supplier-update.component';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { Routes, RouterModule } from '@angular/router';
     ProjeUpdateComponent,
     SearchBarComponent,
     NavbarComponent,
+    CustomerUpdateComponent,
+    ItemUpdateComponent,
+    SupplierUpdateComponent,
   ],
   imports: [
     BrowserModule,
