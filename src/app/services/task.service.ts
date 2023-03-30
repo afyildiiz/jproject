@@ -31,7 +31,7 @@ export class TaskService {
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "53452856783148648325"
+    return "22888172637357163625"
     // return localStorage.getItem('token')
   }
 
@@ -124,18 +124,7 @@ export class TaskService {
       return response.message
     }))
   }
-  insertProject(data:Pipeline){
-    const body={
-      Token:this.getToken(),
-      DataStoreId:'87162637677132734427',
-      Operation:'read',
-      Encrypted:1951,
-      Data:`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet) values('${data.firma_adi}','${data.must_yet_kisi}','${data.proje_adi}','${data.proje_basla}','${data.proje_bitis}','${data.durum}',${data.maliyet})`
-    }
-    return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
-      return response.message
-    }))
-  }
+
   deleteProject(id:any){
     const body ={
       Token:this.getToken(),
@@ -197,20 +186,6 @@ export class TaskService {
   }
 
 
-  updateProject(data: Pipeline) {
-    const body = {
-      Token: this.getToken(),
-      DataStoreId: '35612368858558141732',
-      Operation: 'update',
-      Encrypted: 1951,
-      Data:
-        `Update "postgres".public.j_pipeline ` +
-        `Set proje_adi=${data.proje_adi}, durum='${data.durum}',proje_basla='${data.proje_basla}',proje_bitis='${data.proje_bitis}',maliyet='${data.maliyet}' ` +
-        `WHERE proje_id = ${data.proje_id}`,
-    };
-    return this.http.post(baseUrl + 'Applications/DataOps', body);
-  }
-
   //daha calıstırılmadı
   getItemsForProject(){
     const body={
@@ -225,10 +200,6 @@ export class TaskService {
     }))
   }
 
-
-
-
-
   getLastProject(){
     const body={
       Token:this.getToken(),
@@ -240,6 +211,32 @@ export class TaskService {
     return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
       return response.message
     }))
+  }
+
+
+  upsertProject(values: any, type: any) {
+    const updateBody = {
+      "Token": this.getToken(),
+      "DataStoreId": "87162637677132734427",
+      "Operation": "upsert",
+      "Data": `Update j_pipeline ` +
+        `Set proje_adi='${values.proje_adi}', firma_adi='${values.firma_adi}',must_yet_kisi='${values.must_yet_kisi}', durum='${values.durum}',proje_basla='${values.proje_basla}',proje_bitis='${values.proje_bitis}',maliyet='${values.maliyet}',is_kalemi='${values.is_kalemi}'` +
+        `WHERE proje_id = ${values.proje_id}`
+    }
+
+    const insertBody = {
+      "Token": this.getToken(),
+      "DataStoreId": "87162637677132734427",
+      "Operation": "upsert",
+      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,is_kalemi) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.is_kalemi}')`
+
+    }
+
+    return this.http.post(baseUrl + 'Applications/DataOps', type == 'insert' ? insertBody : updateBody).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
   }
 }
 

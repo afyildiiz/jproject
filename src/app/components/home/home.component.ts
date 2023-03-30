@@ -93,10 +93,6 @@ export class HomeComponent implements OnInit {
     return this.task.getRecentlyViewedComponents();
   }
 
-  // openUpdate(){
-  //   this.modal.open(update,{size:'lg',centeredtrue})
-  // }
-
   getProject(){
     this.task.getProjects().subscribe((res:any)=>{
       this.projectCount=res.length
@@ -125,32 +121,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  saveProject(){
-    if (this.projectForm.valid){
-      let item=Object.assign(this.projectForm.value);
-      item.dateAdded = new Date();
-
-      this.task.insertProject(item).subscribe((res:any)=>{
-        console.log("Project",res.proje_adi,"at ", item.dateAdded)
-        alert("Kaydedildi!")
-        this.getProject()
-        this.modal.dismissAll()
-        this.isAdded=true
-      })
-    }else{
-      alert("boslukları doldurun")
-    }
-  }
-
-  deleteProject(id:any){
-    if (confirm("Kaydı Silmek İstiyor musunuz?")){
-      this.task.deleteProject(id).subscribe((res:any)=>{
-        console.log(res);
-        this.getProject()
-      })
-    }
-  }
-
   getComboboxNames(){
     this.task.getComboboxName().subscribe((res:any)=>{
       this.musteriCombobox=res
@@ -158,21 +128,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  selectedTask:any
 
-  open(savedItems: any) {
-    this.modal.open(savedItems, { size:'lg',centered:true });
-  }
-
-  openDetail(detail:any){
-    this.modal.open(detail,{ size:'lg',centered:true })
-  }
-
-  row:any
-  edit(row: any) {
-    const modalRef = this.modal.open(ProjeUpdateComponent,{ windowClass:'custom-modal'});
-    modalRef.componentInstance.projects = row;
-  }
 
 
   // formatCurrency_TaxableValue(event:any)

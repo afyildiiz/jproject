@@ -48,17 +48,17 @@ export class ProjeUpdateComponent implements OnInit {
     })
   }
 
-  updateProject() {
-    if (this.projectForm.valid) {
-      let item = Object.assign({ proje_id: this.data.proje_id }, this.projectForm.value);
-      this.task.updateProject(item).subscribe((res: any) => {
-        console.log(res);
-        alert("Güncellendi!");
-      });
-    } else {
-      alert("Lütfen tüm alanları doldurun.");
-    }
-  }
+  // updateProject() {
+  //   if (this.projectForm.valid) {
+  //     let item = Object.assign({ proje_id: this.data.proje_id }, this.projectForm.value);
+  //     this.task.updateProject(item).subscribe((res: any) => {
+  //       console.log(res);
+  //       alert("Güncellendi!");
+  //     });
+  //   } else {
+  //     alert("Lütfen tüm alanları doldurun.");
+  //   }
+  // }
 }
 
 

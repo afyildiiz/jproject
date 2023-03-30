@@ -1,28 +1,3 @@
-<!-- <button  [routerLink]="['/login']" class="btn btn-danger" style="float: left; border-radius: 50%;width: 50px;height: 50px;"><i class="fa-solid fa-circle-left"></i></button> -->
-
-<!--  GUNCELLEME BUTONUYLA  COMPONENT ACILACAK. EKLEMEK İCİN MODAL GELIYOR TAMAMDIR. SATIRIN ÜSTÜNE BASINCA İTEMLER GELECEK -->
-<!-- <ul  class="responsive-table">
-    <li style="margin-top: 60px;" class="table-header">
-      <div class="col col-2">Proje</div>
-      <div class="col col-1">Firma Adi</div>
-      <div class="col col-1">Statü</div>
-      <div class="col col-1">Yetkili Müşteri</div>
-      <div class="col col-2">Proje Başla</div>
-      <div class="col col-2">Proje Bitiş</div>
-      <div class="col col-2">Fiyat</div>
-      <div class="col col-1"></div>
-    </li>
-    <li class="table-row" *ngFor="let item of projects" (click)="open(savedItems)" >
-      <div class="col col-2" > {{item.proje_adi}} </div>
-      <div class="col col-1" > {{item.firma_adi}} </div>
-      <div class="col col-1" > {{item.durum}} </div>
-      <div class="col col-1" > {{item.must_yet_kisi}} </div>
-      <div class="col col-2" > {{item.proje_basla|date:"shortDate"}} </div>
-      <div class="col col-2" > {{item.proje_bitis|date:"shortDate"}} </div>
-      <div class="col col-2" > {{item.maliyet}} </div>
-      <div class="col col-2" > <i (click)="edit(project);$event.stopPropagation();"  style="cursor: pointer;" class="fa-solid fa-pen-to-square"></i><i (click)="deleteProjects(item.proje_id);$event.stopPropagation();" style="margin-left: 15%;cursor:pointer" class="fa-solid fa-trash"></i></div>
-    </li>
-  </ul> -->
 
 <div class="wrapper">
   <div class="title">
@@ -31,7 +6,7 @@
   </div>
   <div class="container">
     <button
-      (click)="openProject(project)"
+      (click)="opens(project,'','insert')"
       class="btn btn-success"
       style="float: left; width: 50px; height: 50px; margin-bottom: 1rem"
     >
@@ -66,7 +41,7 @@
             <td>{{ item.maliyet }}</td>
             <td>
               <i
-                (click)="edit(project); $event.stopPropagation()"
+                (click)="opens(content,item,'update'); $event.stopPropagation()"
                 style="cursor: pointer"
                 class="fa-solid fa-pen-to-square"
               ></i
@@ -166,7 +141,7 @@
             </div>
 
             <div class="button">
-                <button (click)="saveProject()"  id="kaydet">Kaydet</button>
+                <button (click)="upsertProject()"  id="kaydet">Kaydet</button>
             </div>
 
         </form>
@@ -223,6 +198,94 @@
         </main>
 </ng-template>
 
-<!-- <ng-template #projectupdate let-modal>
-<app-proje-update [project]="selectedProject"></app-proje-update>
-</ng-template> -->
+<ng-template #content let-modal>
+
+  <div class="wrapp">
+    <div class="form">
+        <h1 class="title">Projeyi Güncelle</h1>
+        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()" ></button>
+        <form [formGroup]="projectForm" class="myform">
+            <div class="control-from">
+                <label for="firstname">Proje Adi</label>
+                <input  class="form-control" type="text" formControlName="proje_adi" id="firstname" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="lastname">Kurum Adi</label>
+                <input class="form-control" type="text" formControlName="firma_adi" id="lastname" value="" required>
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Durum<span class="text-danger"> *</span></label
+      >
+      <select
+        class="form-control form-select"
+        formControlName="durum"
+        style="margin-top: 3%"
+        class="form-select"
+        name=""
+        id=""
+      >
+        <option value="" disabled selected></option>
+        <option value="Yeni">Yeni</option>
+        <option value="Çalışılıyor">Çalışılıyor</option>
+        <option value="Bekliyor">Bekliyor</option>
+        <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
+        <option value="Tamamlandı">Tamamlandı</option>
+      </select>
+
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
+      >
+      <select
+        class="form-control form-select"
+        formControlName="must_yet_kisi"
+        style="margin-top: 3%"
+        class="form-select"
+        name=""
+        id=""
+      >
+        <option value="" disabled selected></option>
+        <option
+          *ngFor="let item of musteriCombobox"
+          value="musteri"
+          [value]="item.ad"
+        >
+          {{ item.ad + " " + item.soyad }}
+        </option>
+      </select>
+
+            </div>
+
+            <div class="full-width">
+                <label for="basla">Proje Başlama Tarihi</label>
+                <input class="form-control" type="date" formControlName="proje_basla" id="basla" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="bitis">Proje Bitiş Tarihi</label>
+                <input class="form-control" type="date" formControlName="proje_bitis" id="bitis" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="fiyat">Proje Fiyati </label>
+                <input class="form-control" type="text" formControlName="maliyet" id="fiyat" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="isk">Proje'ye Ait İş Kalemleri </label>
+                <input  class="form-control" type="text" formControlName="is_kalemi" id="isk" value="" required>
+            </div>
+
+            <div class="button">
+                <button (click)="upsertProject()" id="kaydet">Güncelle</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</ng-template>
