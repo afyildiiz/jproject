@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, Pipe } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Pipe, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Item } from 'src/app/item';
 import { Pipeline } from 'src/app/pipeline';
 import { TaskService } from 'src/app/services/task.service';
 import Swal from 'sweetalert2'
@@ -20,13 +22,16 @@ export class ProjectComponent implements OnInit {
 
 	placement = 'bottom';
 
+
+
 projects:Pipeline[]=[]
 projectForm!:FormGroup
-
+itemforproject:Pipeline[]=[]
 musteriCombobox:any=[]
 
-iskalemleri:any[]=[]
+is_kalemi:Item[]=[]
 
+dropdownSettings:IDropdownSettings={};
 
 selectedProject:Pipeline={
   firma_adi: '',
@@ -39,31 +44,35 @@ selectedProject:Pipeline={
   proje_id: 0,
   is_kalemi:''
 }
+data:Pipeline={
+  firma_adi: '',
+  must_yet_kisi: '',
+  proje_adi: '',
+  proje_basla: new Date(),
+  proje_bitis: new Date(),
+  durum: '',
+  maliyet: 0,
+  proje_id: 0,
+  is_kalemi:''
+}
+
 constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
 
 
   ngOnInit(): void {
+
+    this.dropdownSettings = {
+      idField: 'item_id',
+      textField: 'item_adi',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All'
+    };
+    
+    
     this.task.addRecentlyViewedComponent(this.constructor.name);
 
-
-        // this.getLength()
         this.getProject();
         this.getComboboxNames();
-        // this.projectForm=this.fb.group({
-        //   firma_adi:['',Validators.required],
-        //   must_yet_kisi:['',Validators.required],
-        //   proje_adi:['',Validators.required],
-        //   proje_basla:['',Validators.required],
-        //   proje_bitis:['',Validators.required],
-        //   durum:['',Validators.required],
-        //   maliyet:['',Validators.required],
-        //   is_kalemi:['',Validators.required]
-        //   // aciklama:['',Validators.required],
-        //   // sehir:['',Validators.required],
-        //   // yetkili:['',Validators.required],
-    
-        // })
-
         this.projectForm = this.fb.group({
           firma_adi: new FormControl(this.selectedProject.firma_adi, Validators.required),
           must_yet_kisi: new FormControl(this.selectedProject.must_yet_kisi, Validators.required),
@@ -73,22 +82,24 @@ constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskServic
           durum: new FormControl(this.selectedProject.durum, Validators.required),
           maliyet: new FormControl(this.selectedProject.maliyet, Validators.required),
           is_kalemi: new FormControl(this.selectedProject.is_kalemi, Validators.required),
-          // aciklama: new FormControl(this.selectedProject.customer, Validators.required),
-          // sehir: new FormControl(this.selectedProject.customer, Validators.required),
-          // yetkili: new FormControl(this.selectedProject.customer, Validators.required),
-
-    
-    
         });
+    
   }
   get f(){
     return this.projectForm.controls
   }
 
+  getItemForModal(project:any){
+    this.task.getItemsForProjectModal(project.id).subscribe(res=>{
+      console.log(res)
+      this.itemforproject=res
+    })
+  }
+
   getProject(){
     this.task.getItems().subscribe(res =>{
       console.log(res)
-       this.iskalemleri = res
+       this.is_kalemi = res
       })
     this.task.getProjects().subscribe((res:any)=>{
       console.log(res)
@@ -97,10 +108,26 @@ constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskServic
     })
   }
 
+  ///
 
-  openProject(savedItems:any){
-    this.modal.open(savedItems,{size:'lg',centered:true})
+  selectedItems:Pipeline[]=[]
+
+  onRowClick(item: any): void {
+    this.selectedItems = this.projects.filter(project => project.is_kalemi === item);
   }
+
+  openSavedModal(savedItems:any){
+    this.modal.open(savedItems ,{ size: 'lg' ,centered:true});
+
+  }
+  
+
+
+
+
+
+
+
 
   opens(content: any, item: any, type: string) {
 
@@ -123,7 +150,7 @@ constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskServic
 
   upsertProject() {
     let data = Object.assign(this.selectedProject, this.projectForm.value)
-
+    // this.data.is_kalemi = this.selectedUser?.item_id.toString()
     let type = data.proje_id == '' ? 'insert' : 'update'
     if (this.projectForm && !this.projectForm.valid) {
       Swal.fire('Lütfen Tüm Alanları Doldurunuz!', '', 'info')

@@ -19,7 +19,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CustomerUpdateComponent } from './components/customer-update/customer-update.component';
 import { ItemUpdateComponent } from './components/item-update/item-update.component';
 import { SupplierUpdateComponent } from './components/supplier-update/supplier-update.component';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -46,6 +46,9 @@ import { SupplierUpdateComponent } from './components/supplier-update/supplier-u
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
+    NgMultiSelectDropDownModule.forRoot()
+
+
 
 
   ],

@@ -13,6 +13,7 @@ export class LeftbarComponent implements OnInit {
   supplierCount:number=0
   itemCount:number=0
 
+  navDisplay!:boolean
 
   navToggled:boolean=false
 
@@ -24,7 +25,8 @@ export class LeftbarComponent implements OnInit {
         { name: 'Projeler', icon: 'plus-circle'},
   ]
 
-  constructor(private task:TaskService) { }
+  constructor(private task:TaskService) { 
+  }
 
   ngOnInit(): void {
     this.getProjectCount();
@@ -32,6 +34,15 @@ export class LeftbarComponent implements OnInit {
     this.getSupplierCount();
     this.getItemCount();
 
+  }
+  toggleNavv() {
+    this.navDisplay = !this.navDisplay;
+  }
+
+  showSidebar = false;
+
+  toggleSidebar(): void {
+    this.showSidebar = !this.showSidebar;
   }
 
   getProjectCount(){

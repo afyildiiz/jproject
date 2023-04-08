@@ -13,6 +13,8 @@ import { baseUrl } from '../utils/baseUrl';
 })
 export class TaskService {
 
+  items:Item[]=[]
+  
   recentlyViewedComponents: string[] = [];
 
   addRecentlyViewedComponent(componentName: any): void {
@@ -31,7 +33,7 @@ export class TaskService {
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "22888172637357163625"
+    return "31484511126681652617"
     // return localStorage.getItem('token')
   }
 
@@ -200,6 +202,19 @@ export class TaskService {
     }))
   }
 
+  getItemsForProjectModal(id:any){
+    const body={
+      Token:this.getToken(),
+      DataStoreId:'62723767246517453585',
+      Operation:'read',
+      Encrypted:1951,
+      Data:`select is_kalemi from "postgres".public.j_pipeline where proje_id='${id}'`
+    }
+    return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
+      return response.message
+    }))
+  }
+
   getLastProject(){
     const body={
       Token:this.getToken(),
@@ -238,6 +253,22 @@ export class TaskService {
       })
     );
   }
+
+  addItemToProject(selectedItem: any, projectId: number) {
+    const body = {
+      "Token": this.getToken(),
+      "DataStoreId": "87162637677132734427",
+      "Operation": "upsert",
+      "Data": `insert into "postgres".public.j_pipeline(proje_id, is_kalemi, maliyet) values(${projectId}, ${selectedItem.is_kalemi}, ${selectedItem.maliyet})`
+    }
+  
+    return this.http.post(baseUrl + 'Applications/DataOps', body).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
+  }
+  
 }
 
 

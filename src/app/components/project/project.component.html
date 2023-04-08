@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of projects" (click)="open(savedItems)">
+          <tr *ngFor="let item of projects" (click)="openSavedModal(savedItems)" (click)="onRowClick(item.is_kalemi)">
             <td>{{ item.proje_adi }}</td>
             <td>{{ item.firma_adi }}</td>
             <td>{{ item.durum }}</td>
@@ -135,10 +135,26 @@
                 <input type="text" formControlName="maliyet" id="fiyat" value="" required>
             </div>
 
+
+                <!-- <select
+                formControlName="is_kalemi"
+                style="margin-top: 3%"
+                class="form-select"
+                name=""
+                id=""
+              >
+                <option
+                *ngFor="let item of is_kalemi"
+                [value]="item.item_id"
+                >
+                  {{ item.item_adi }}
+                </option>
+              </select> -->
             <div class="control-from">
                 <label for="isk">Proje'ye Ait İş Kalemleri </label>
                 <input type="text" formControlName="is_kalemi" id="isk" value="" required>
             </div>
+
 
             <div class="button">
                 <button (click)="upsertProject()"  id="kaydet">Kaydet</button>
@@ -159,36 +175,18 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">... Projesine Kayıtlı İş Kalemleri</h2>
+                      <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">{{ selectedItems[0]?.proje_adi }} Projesine Kayıtlı İş Kalemleri</h2>
                     </div>
                 </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>İş Kalemi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                        <tr *ngFor="let item of selectedItems">
+                            <th> {{item.is_kalemi}} </th>
                         </tr>
                     </tbody>
                 </table>
@@ -277,9 +275,9 @@
             </div>
 
             <div class="control-from">
-                <label for="isk">Proje'ye Ait İş Kalemleri </label>
-                <input  class="form-control" type="text" formControlName="is_kalemi" id="isk" value="" required>
-            </div>
+              <label for="isk">Proje'ye Ait İş Kalemleri </label>
+              <input type="text" formControlName="is_kalemi" id="isk" value="" required>
+          </div>
 
             <div class="button">
                 <button (click)="upsertProject()" id="kaydet">Güncelle</button>
