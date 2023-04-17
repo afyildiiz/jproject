@@ -38,7 +38,7 @@ export class SupplierComponent implements OnInit {
       vergi_dairesi:['',Validators.required],
       vergi_no:['',Validators.required],
       aciklama:['',Validators.required],
-      yetkili:['',Validators.required],
+      // yetkili:['',Validators.required],
       unvan:['',Validators.required]
     })
   }

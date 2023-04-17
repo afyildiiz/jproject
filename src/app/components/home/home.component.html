@@ -90,26 +90,6 @@
   <section id="stats-subtitle">
 
   <div class="row">
-    <!-- <div class="col-xl-6 col-md-12"> -->
-      <!-- <div class="card">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
-              <div class="align-self-center">
-                <i class="icon-speech warning font-large-2 mr-2"></i>
-              </div>
-              <div class="media-body">
-                <h4>Total Comments</h4>
-                <span>Monthly blog comments</span>
-              </div>
-              <div class="align-self-center"> 
-                <h1>84,695</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    <!-- </div> -->
 
 
   <div class="col-xl-12 col-md-12" style="margin-top: 1rem;">
@@ -156,15 +136,13 @@
     <div class="col-xl-3 col-md-12" style="margin-top: 2rem">
       <div class=" overflow-hidden">
         <div class="content">
-            <!-- <div class="card-header" style="text-align: center;">
-              <div class="h3"> En Son Kullanılan</div>
-            </div> -->
           <div class="card-body cleartfix">
             <h4 style="text-align: center;">En Son Kullanılan</h4>
             <hr>
             <div style="text-align:center">
               <div *ngFor="let component of recentComponents">
                 <a style="font-family: 'Inconsolata', monospace;" [routerLink]="['/', component.toLowerCase()]">{{ component }}</a>
+                <!-- <span>{{ displayNameMap[component] || component }}</span> -->
               </div>
             </div>
             <!-- son kullanılan sekme -->

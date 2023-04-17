@@ -15,7 +15,9 @@
 
     <div class="table">
       <div class="search" style="margin-bottom: 3rem">
-        <app-search-bar></app-search-bar>
+        <!-- <app-search-bar></app-search-bar> -->
+    <input [(ngModel)]="searchTerm" class="search__input" type="text" placeholder="Search">
+
       </div>
       <table cellspacing="0" cellpadding="0">
         <thead>
@@ -31,7 +33,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of projects" (click)="openSavedModal(savedItems)" (click)="onRowClick(item.is_kalemi)">
+          <tr *ngFor="let item of projects | search: searchTerm;" (click)="openSavedModal(savedItems)" >
+            <!-- (click)="onRowClick(item.is_kalemi)" -->
             <td>{{ item.proje_adi }}</td>
             <td>{{ item.firma_adi }}</td>
             <td>{{ item.durum }}</td>
@@ -60,149 +63,19 @@
   </div>
 </div>
 
-<ng-template #project>
-  <div class="wrapp">
-    <div class="form">
-        <h1 class="title">Proje Ekle</h1>
-        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()"></button>
-        <form [formGroup]="projectForm" class="myform">
-            <div class="control-from">
-                <label for="firstname">Proje Adi</label>
-                <input type="text" formControlName="proje_adi" id="firstname" value="" required>
-            </div>
 
-            <div class="control-from">
-                <label for="lastname">Kurum Adi</label>
-                <input type="text" formControlName="firma_adi" id="lastname" value="" required>
-            </div>
-
-            <div class="control-from">
-      <label class="form-control-label px-3"
-        >Durum<span class="text-danger"> *</span></label
-      >
-      <select
-        formControlName="durum"
-        style="margin-top: 3%"
-        class="form-select"
-        name=""
-        id=""
-      >
-        <option value="" disabled selected></option>
-        <option value="Yeni">Yeni</option>
-        <option value="Çalışılıyor">Çalışılıyor</option>
-        <option value="Bekliyor">Bekliyor</option>
-        <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
-        <option value="Tamamlandı">Tamamlandı</option>
-      </select>
-
-            </div>
-
-            <div class="control-from">
-      <label class="form-control-label px-3"
-        >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
-      >
-      <select
-        formControlName="must_yet_kisi"
-        style="margin-top: 3%"
-        class="form-select"
-        name=""
-        id=""
-      >
-        <option value="" disabled selected></option>
-        <option
-          *ngFor="let item of musteriCombobox"
-          value="musteri"
-          [value]="item.ad"
-        >
-          {{ item.ad + " " + item.soyad }}
-        </option>
-      </select>
-
-            </div>
-
-            <div class="full-width">
-                <label for="basla">Proje Başlama Tarihi</label>
-                <input type="date" formControlName="proje_basla" id="basla" value="" required>
-            </div>
-
-            <div class="control-from">
-                <label for="bitis">Proje Bitiş Tarihi</label>
-                <input type="date" formControlName="proje_bitis" id="bitis" value="" required>
-            </div>
-
-            <div class="control-from">
-                <label for="fiyat">Proje Fiyati </label>
-                <input type="text" formControlName="maliyet" id="fiyat" value="" required>
-            </div>
-
-
-                <!-- <select
-                formControlName="is_kalemi"
-                style="margin-top: 3%"
-                class="form-select"
-                name=""
-                id=""
-              >
-                <option
-                *ngFor="let item of is_kalemi"
-                [value]="item.item_id"
-                >
-                  {{ item.item_adi }}
-                </option>
-              </select> -->
-            <div class="control-from">
-                <label for="isk">Proje'ye Ait İş Kalemleri </label>
-                <input type="text" formControlName="is_kalemi" id="isk" value="" required>
-            </div>
-
-
-            <div class="button">
-                <button (click)="upsertProject()"  id="kaydet">Kaydet</button>
-            </div>
-
-        </form>
-    </div>
-</div>
-</ng-template>
-
-<ng-template #savedItems let-modal>
-  <main>
-        
-    <!--MDB Tables-->
-    <div class="mt-4">
-
-        <div class=" mb-4">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                      <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">{{ selectedItems[0]?.proje_adi }} Projesine Kayıtlı İş Kalemleri</h2>
-                    </div>
-                </div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>İş Kalemi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of selectedItems">
-                            <th> {{item.is_kalemi}} </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        </div>
-        </main>
-</ng-template>
-
+<!-- DOKUNMA -->
 <ng-template #content let-modal>
 
   <div class="wrapp">
     <div class="form">
         <h1 class="title">Projeyi Güncelle</h1>
-        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()" ></button>
+        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="modal.dismissAll()"></button>
         <form [formGroup]="projectForm" class="myform">
+          <div class="buut">
+            <button >STOK GÜNCELLE </button>
+          </div>
+          <br>
             <div class="control-from">
                 <label for="firstname">Proje Adi</label>
                 <input  class="form-control" type="text" formControlName="proje_adi" id="firstname" value="" required>
@@ -221,11 +94,9 @@
         class="form-control form-select"
         formControlName="durum"
         style="margin-top: 3%"
-        class="form-select"
         name=""
         id=""
       >
-        <option value="" disabled selected></option>
         <option value="Yeni">Yeni</option>
         <option value="Çalışılıyor">Çalışılıyor</option>
         <option value="Bekliyor">Bekliyor</option>
@@ -243,11 +114,9 @@
         class="form-control form-select"
         formControlName="must_yet_kisi"
         style="margin-top: 3%"
-        class="form-select"
         name=""
         id=""
       >
-        <option value="" disabled selected></option>
         <option
           *ngFor="let item of musteriCombobox"
           value="musteri"
@@ -259,6 +128,11 @@
 
             </div>
 
+            <div class="control-from">
+              <label for="fiyat">Proje Satış Fiyatı </label>
+              <input class="form-control" type="text" formControlName="maliyet" id="fiyat" value="" required>
+          </div>
+
             <div class="full-width">
                 <label for="basla">Proje Başlama Tarihi</label>
                 <input class="form-control" type="date" formControlName="proje_basla" id="basla" value="" required>
@@ -269,15 +143,6 @@
                 <input class="form-control" type="date" formControlName="proje_bitis" id="bitis" value="" required>
             </div>
 
-            <div class="control-from">
-                <label for="fiyat">Proje Fiyati </label>
-                <input class="form-control" type="text" formControlName="maliyet" id="fiyat" value="" required>
-            </div>
-
-            <div class="control-from">
-              <label for="isk">Proje'ye Ait İş Kalemleri </label>
-              <input type="text" formControlName="is_kalemi" id="isk" value="" required>
-          </div>
 
             <div class="button">
                 <button (click)="upsertProject()" id="kaydet">Güncelle</button>
@@ -286,4 +151,378 @@
         </form>
     </div>
 </div>
+</ng-template>
+
+
+
+<!-- DOKUNMA -->
+<ng-template #savedItems let-modal >
+  <main *ngIf="selectedItems.length > 0">
+        
+
+    <div class="mt-4">
+
+        <div class=" mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                      <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">{{ selectedItems[0].proje_adi }} Projesine Kayıtlı İş Kalemleri</h2>
+                    </div>
+                </div>
+                <!-- <table class="table table-striped">
+                    <tbody>
+                        <tr *ngFor="let item of selectedItems">
+                            <th> {{item.is_kalemi}} </th>
+                        </tr>
+                    </tbody>
+                </table> -->
+            </div>
+        </div>
+        </div>
+        </main>
+</ng-template>
+
+
+
+<!-- PROJE EKLE -->
+<ng-template #project> 
+
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem>
+        <a ngbNavLink>Proje Ekle</a>
+        <ng-template ngbNavContent>
+          <div class="wrapp">
+            <div class="form">
+                <h1 class="title">Proje Genel Bilgileri</h1>
+                <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="close()"></button>
+                <form [formGroup]="projectForm" class="myform">
+      
+                    <div class="control-from">
+                        <label for="firstname">Proje Adi</label>
+                        <input type="text" formControlName="proje_adi" id="firstname" value="" required>
+                    </div>
+        
+                    <div class="control-from">
+                        <label for="lastname">Kurum Adi</label>
+                        <input type="text" formControlName="firma_adi" id="lastname" value="" required>
+                    </div>
+        
+                    <div class="control-from">
+              <label class="form-control-label px-3"
+                >Durum<span class="text-danger"> *</span></label
+              >
+              <select
+                formControlName="durum"
+                style="margin-top: 3%"
+                class="form-select"
+                name=""
+                id=""
+              >
+                <option value="Yeni">Yeni</option>
+                <option value="Çalışılıyor">Çalışılıyor</option>
+                <option value="Bekliyor">Bekliyor</option>
+                <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
+                <option value="Tamamlandı">Tamamlandı</option>
+              </select>
+        
+                    </div>
+        
+                    <div class="control-from">
+              <label class="form-control-label px-3"
+                >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
+              >
+              <select
+                formControlName="must_yet_kisi"
+                style="margin-top: 3%"
+                class="form-select form-control"
+                name=""
+                id=""
+              >
+                <option
+                  *ngFor="let item of musteriCombobox"
+                  value="musteri"
+                  [value]="item.ad"
+                >
+                  {{ item.ad + " " + item.soyad }}
+                </option>
+              </select>
+        
+                    </div>
+        
+                    <div class="full-width">
+                        <label for="basla">Proje Başlama Tarihi</label>
+                        <input type="date" formControlName="proje_basla" id="basla" value="" required>
+                    </div>
+        
+                    <div class="control-from">
+                        <label for="bitis">Proje Bitiş Tarihi</label>
+                        <input type="date" formControlName="proje_bitis" id="bitis" value="" required>
+                    </div>
+        
+                    <div class="control-from">
+                      <label for="fiyat">Proje Satış Fiyati </label>
+                      <input type="text" formControlName="maliyet" id="fiyat" value="" required>
+                  </div>
+
+                  <div class="control-from">
+                    <label for="firstname">Proje Kalemleri Toplam Fiyatı</label>
+                    <input  class="form-control" formControlName="toplam_item_fiyat" type="text" value="" required>
+                </div>
+    
+                <div class="control-from">
+                    <label for="lastname">Açıklama</label>
+                    <input class="form-control" formControlName="aciklama" type="text"  value="" required>
+                </div>
+
+                <div class="control-from">
+                  <label for="lastname">Proje Kârı</label>
+                  <input class="form-control" formControlName="kar" type="text"  value="" required>
+              </div>        
+        
+              <div class="buttonnnn" style="display:flex;justify-content:center">
+                  <button (click)="upsertProject()"  id="kaydet">Kaydet</button>
+              </div>
+                  
+                </form>
+            </div>
+        </div>
+        </ng-template>
+      </li>
+
+
+
+
+
+
+      <!-- 2. NAV ITEM -->
+      <li ngbNavItem>
+        <a ngbNavLink>Stok Ekranı</a>
+        <ng-template ngbNavContent style="background-color: #F4F5F7;">
+
+  <!-- projeye item ekleme modalı 1 -->         
+  <div style="font-family: 'Inconsolata', monospace;" class="form">
+      <h2 class="title">Proje Stok Ekranı</h2>
+
+      <button (click)="openprojestok(projestok)" class="btn btn-success" style="margin-left:2rem"><i class="fa-solid fa-plus"></i></button>
+
+      <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="close()"></button>
+
+
+  <div class="container" style="padding: 50px">
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title m-b-0">Eklenen Stoklar</h5>
+            </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead" style="background-color: #f4f5f6;">
+                            <tr>
+                                <th>
+                                  #
+                                </th>
+                                <th scope="col">Stok Adi</th>
+                                <th scope="col">Stok Miktari</th>
+                                <th scope="col">Toplam Maliyet</th>
+                            </tr>
+                        </thead>
+                        <tbody class="customtable">
+                            <tr *ngFor="let item of selectedItem">
+                                <th>
+                                      <i style="cursor:pointer" class="fa-solid fa-xmark" (click)="uncheck(item)"></i>
+                                </th>
+                                <td> {{item.item_adi}} </td>
+                                <td> {{item.miktar_birim}} </td>
+                                <td> {{item.maliyet}} {{item.birim}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+   </div> 
+          <div class="button" style="padding: 12px">
+            <button (click)="upsertProject()"  id="kaydet">Stoğu Kaydet</button>
+        </div>
+
+
+  </div>
+
+        </ng-template>
+      </li>
+
+
+
+
+      <li ngbNavItem>
+        <a ngbNavLink>Finansal </a>
+        <!-- <ng-template ngbNavContent>
+          <div class="wrapp">
+            <div class="form">
+                <h1 class="title">Proje Finansal Bilgileri</h1>
+                <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="close()"></button>
+              <form class="myformm">
+                    <div class="control-from">
+                        <label for="firstname">Proje Kalemleri Toplam Fiyatı</label>
+                        <input  class="form-control" type="text" value="" required>
+                    </div>
+        
+                    <div class="control-from">
+                        <label for="lastname">Açıklama</label>
+                        <input class="form-control" type="text"  value="" required>
+                    </div>
+
+                    <div class="control-from">
+                      <label for="lastname">Proje Kârı</label>
+                      <input class="form-control" type="text"  value="" required>
+                  </div>
+                  
+                  <div class="buttonnnn">
+                    <button  id="kaydet">Kaydet</button>
+                </div>
+                </form>
+              </div>
+            </div>
+        </ng-template> -->
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+
+</ng-template>
+
+
+
+
+
+
+
+
+<!-- projeye item ekleme modalı 1 -->
+<!-- <ng-template #itemekle let-modal>
+         
+  <div style="background-color: #F4F5F7;font-family: 'Inconsolata', monospace;" class="form">
+      <h2 class="title">Proje Stok Ekranı</h2>
+
+      <button (click)="openprojestok(projestok)" class="btn btn-success" style="position:absolute;left:50px;top:25px"><i class="fa-solid fa-plus"></i></button>
+
+      <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="close()"></button>
+
+        <hr>
+
+  <div class="container" style="padding: 50px">
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title m-b-0">Eklenecek Stoklar</h5>
+            </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead" style="background-color: #f4f5f6;">
+                            <tr>
+                                <th>
+                                    <label class="customcheckbox m-b-20">
+                                        <input type="checkbox" id="mainCheckbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                                <th scope="col">Stok Adi</th>
+                                <th scope="col">Stok Miktari</th>
+                                <th scope="col">Toplam Maliyet</th>
+                            </tr>
+                        </thead>
+                        <tbody class="customtable">
+                            <tr *ngFor="let item of selectedItem">
+                                <th>
+                                    <label class="customcheckbox">
+                                        <input type="checkbox" class="listCheckbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                                <td> {{item.item_adi}} </td>
+                                <td><input autofocus style="border:0" type="text" [(ngModel)]="item.miktar_birim" ></td>
+                                <td><input style="border:0" type="text" [(ngModel)]="item.maliyet*item.miktar_birim">{{item.birim}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+   </div> 
+
+
+          <div class="button" style="padding: 12px">
+            <button id="kaydet">Stoğu Kaydet</button>
+        </div>
+
+
+  </div>
+
+
+</ng-template> -->
+
+
+
+
+<ng-template #projestok let-modal>
+  <!-- <h2 class="title">Gerekli İtemleri Listeye Çek</h2> -->
+  <div class="search">
+<input  class="search__input" type="text" style="margin-top: 1rem;margin-right:1rem" placeholder="Search">
+  </div>
+
+  <div class="container" style="padding: 50px">
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title m-b-0">Eklenecek Stoklar</h5>
+            </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead" style="background-color: #f4f5f6;">
+                            <tr>
+                                <th>
+                                  #
+                                </th>
+                                <th scope="col">Stok Adi</th>
+                                <th scope="col">Marka</th>
+                                <th scope="col"> Model</th>
+                                <th scope="col">Stok Miktari</th>
+                                <th scope="col">Birim Fiyat</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="customtable">
+                            <tr *ngFor="let item of items">
+                                <th>
+                                    <label class="customcheckbox">
+                                        <input id="checks" type="checkbox" class="listCheckbox" [(ngModel)]="item.selected" (change)="onItemSelect(item)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                                <td> {{item.item_adi}} </td>
+                                <td> {{item.marka}} </td>
+                                <td> {{item.model}} </td>
+                                <td> {{item.miktar_birim}} </td>
+                                <td> {{item.maliyet}} {{item.birim}} </td>
+                                <td><b *ngIf="item.miktar_birim!==0">stokta</b><button *ngIf="item.miktar_birim==0" class="button btn-warn">sipariş</button> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        </div>
+        <button style="width:100px;position:absolute;left:45%" class="button btn-success" (click)="closeModal()" >Tamam</button>
+
+    </div>
+</div>
+</div> 
+
+
+
 </ng-template>

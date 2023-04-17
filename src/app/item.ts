@@ -8,5 +8,6 @@ export interface Item{
     maliyet:number,
     birim:string,
     tarih:Date,
-    item_id:number
+    item_id:number,
+    selected:boolean
 }

@@ -1,3 +1,5 @@
+import { Item } from "./item";
+
 export interface Pipeline{
     // yetkili:string,
     firma_adi:string,
@@ -6,9 +8,12 @@ export interface Pipeline{
     proje_adi:string,
     proje_basla:Date,
     proje_bitis:Date,
-    // aciklama:string,
     durum:string,
     maliyet:number,
     proje_id:number,
-    is_kalemi:string
+    item_id:number,
+    
+    aciklama:string,
+    kar:number,
+    toplam_item_fiyat:number,
 }

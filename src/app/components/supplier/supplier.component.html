@@ -5,7 +5,7 @@
           <div class="line"></div>
         </div>
         <div class="container">
-          <button (click)="openSupplier(supplier)" class="btn btn-success" style="float: left;width: 50px;height: 50px;"><i class="fa-solid fa-plus"></i></button>
+          <button (click)="openSupplier(supplier)" class="btn btn-success" style="float: left;width: 50px;height: 50px;margin-bottom: 1rem;"><i class="fa-solid fa-plus"></i></button>
           
           <div class="table">
             <div class="search" style="margin-bottom: 3rem;">
@@ -15,15 +15,15 @@
               <thead>
                 <tr>
                   <th scope="col">Şirket Adı</th>
-                  <!-- <th scope="col">Ad</th>
-                  <th scope="col">Soyad</th> -->
+                  <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th>
                   <th scope="col">Adres</th>
                   <th scope="col">Telefon</th>
                   <th scope="col">Email</th>
                   <th scope="col">Vergi Dairesi</th>
                   <th scope="col">Vergi No</th>
                   <th scope="col">Açıklama</th>
-                  <th scope="col">Yetkili Kişi</th>
+                  <!-- <th scope="col">Yetkili Kişi</th> -->
                   <th scope="col">Unvan</th>
                   <th scope="col"></th>
                 </tr>
@@ -31,15 +31,15 @@
               <tbody>
                 <tr *ngFor="let item of suppliers">
                   <td > {{item.sirket_adi}} </td>
-                  <!-- <td>{{item.ad}}</td>
-                  <td> {{item.soyad}} </td> -->
+                  <td > {{item.ad}} </td>
+                  <td > {{item.soyad}} </td>
                   <td> {{item.adres}} </td>
                   <td> {{item.tel}} </td>
                   <td> {{item.email}} </td>
                   <td> {{item.vergi_dairesi}} </td>
                   <td> {{item.vergi_no}} </td>
                   <td> {{item.aciklama}} </td>
-                  <td> {{item.yetkili}} </td>
+                  <!-- <td> {{item.yetkili}} </td> -->
                   <td> {{item.unvan}} </td>
                   <td>
                     <i
@@ -119,10 +119,10 @@
                         <textarea type="text" formControlName="aciklama" id="location" value="" required></textarea>
                     </div>
 
-                    <div class="control-from">
+                    <!-- <div class="control-from">
                         <label for="location">Yetkili </label>
                         <input type="text" formControlName="yetkili" id="location" value="" required>
-                    </div>
+                    </div> -->
 
                     <div class="control-from">
                         <label for="location">Unvan </label>

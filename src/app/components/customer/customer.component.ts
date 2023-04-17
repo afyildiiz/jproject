@@ -39,7 +39,7 @@ export class CustomerComponent implements OnInit {
       vergi_dairesi:['',Validators.required],
       vergi_no:['',Validators.required],
       aciklama:['',Validators.required],
-      yetkili:['',Validators.required],
+      // yetkili:['',Validators.required],
       unvan:['',Validators.required]
     })
   }
@@ -67,6 +67,7 @@ export class CustomerComponent implements OnInit {
     if (this.customerForm.valid){
     let custom=Object.assign(this.customerForm.value);
     this.task.insertCustomers(custom).subscribe((res:any)=>{
+      console.log(res)
       alert("Kaydedildi!");
       this.getCustomer()
     })

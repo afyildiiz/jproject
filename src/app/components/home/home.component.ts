@@ -44,14 +44,27 @@ export class HomeComponent implements OnInit {
     durum: '',
     maliyet: 0,
     proje_id: 0,
-    is_kalemi:''
+    item_id: 0,
+    aciklama: '',
+    kar: 0,
+    toplam_item_fiyat: 0
   }
+
+   displayNameMap:any = {
+    item: 'Stoklar',
+    customer: 'Müşteriler',
+    supplier: 'Tedarikçiler',
+    project: 'Projeler'
+  };
+
   constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskService,private router:Router,private titleservice:Title) { 
     // this.router.events.subscribe((event) => {
     //   if (event instanceof NavigationEnd && event.url!=='/home') {
     //     this.lastVisitedComp = event.url.split('/').pop()!.toUpperCase();
     //   }
     // });
+
+    
   
   }
 
@@ -90,7 +103,8 @@ export class HomeComponent implements OnInit {
   }
 
   getRecentlyViewedComponents(): string[] {
-    return this.task.getRecentlyViewedComponents();
+    const componentNames:string[]= this.task.getRecentlyViewedComponents();
+    return componentNames.map(componentName => this.displayNameMap[componentName] || componentName);
   }
 
   getProject(){

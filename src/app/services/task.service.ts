@@ -28,12 +28,10 @@ export class TaskService {
     return this.recentlyViewedComponents;
   }
 
-
-  
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "31484511126681652617"
+    return "37424486274128852561"
     // return localStorage.getItem('token')
   }
 
@@ -133,7 +131,7 @@ export class TaskService {
       DataStoreId:"87162637677132734427",
       Operation:"delete",
       Encrypted:1951,
-      Data:`delete from "postgres".public.j_pipeline where proje_id='${id}'`
+      Data:`delete from "postgres".public.j_pipeline where proje_id=${id}`
     }
     return this.http.post(baseUrl + 'Applications/DataOps', body)
   }
@@ -182,7 +180,7 @@ export class TaskService {
       DataStoreId:"62723767246517453585",
       Operation:"delete",
       Encrypted:1951,
-      Data:`delete from "postgres".public.j_item where item_id='${id}'`
+      Data:`delete from "postgres".public.j_item where item_id=${id}`
     }
     return this.http.post(baseUrl + 'Applications/DataOps', body)
   }
@@ -208,7 +206,7 @@ export class TaskService {
       DataStoreId:'62723767246517453585',
       Operation:'read',
       Encrypted:1951,
-      Data:`select is_kalemi from "postgres".public.j_pipeline where proje_id='${id}'`
+      Data:`select is_kalemi from "postgres".public.j_pipeline where proje_id=${id}`
     }
     return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
       return response.message
@@ -235,7 +233,7 @@ export class TaskService {
       "DataStoreId": "87162637677132734427",
       "Operation": "upsert",
       "Data": `Update j_pipeline ` +
-        `Set proje_adi='${values.proje_adi}', firma_adi='${values.firma_adi}',must_yet_kisi='${values.must_yet_kisi}', durum='${values.durum}',proje_basla='${values.proje_basla}',proje_bitis='${values.proje_bitis}',maliyet='${values.maliyet}',is_kalemi='${values.is_kalemi}'` +
+        `Set proje_adi='${values.proje_adi}', firma_adi='${values.firma_adi}',must_yet_kisi='${values.must_yet_kisi}', durum='${values.durum}',proje_basla='${values.proje_basla}',proje_bitis='${values.proje_bitis}',maliyet='${values.maliyet}',is_kalemi='${values.is_kalemi}',aciklama='${values.aciklama}',toplam_item_fiyat=${values.toplam_item_fiyat},kar=${values.kar}` +
         `WHERE proje_id = ${values.proje_id}`
     }
 
@@ -243,7 +241,7 @@ export class TaskService {
       "Token": this.getToken(),
       "DataStoreId": "87162637677132734427",
       "Operation": "upsert",
-      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,is_kalemi) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.is_kalemi}')`
+      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,is_kalemi,aciklama,toplam_item_fiyat,kar) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.is_kalemi}','${values.aciklama}',${values.toplam_item_fiyat},${values.kar})`
 
     }
 

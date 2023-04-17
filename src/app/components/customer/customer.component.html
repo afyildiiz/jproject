@@ -8,9 +8,11 @@
             <button (click)="openCustomer(customer)" class="btn btn-success" style="float: left;width: 50px;height: 50px;margin-bottom:1rem"><i class="fa-solid fa-plus"></i></button>
                 
                 <div class="table">
-                  <div class="search" style="margin-bottom: 3rem;">
-                    <app-search-bar></app-search-bar>
-                </div>
+                  <div class="search" style="margin-bottom: 3rem">
+                    <!-- <app-search-bar></app-search-bar> -->
+                <input class="search__input" type="text" placeholder="Search">
+            
+                  </div>
                   <table cellspacing="0" cellpadding="0">
                     <thead>
                       <tr>
@@ -23,7 +25,7 @@
                         <th scope="col">Vergi Dairesi</th>
                         <th scope="col">Vergi No</th>
                         <th scope="col">Açıklama</th>
-                        <th scope="col">Yetkili Kişi</th>
+                        <!-- <th scope="col">Yetkili Kişi</th> -->
                         <th scope="col">Unvan</th>
                         <th scope="col"></th>
                       </tr>
@@ -39,7 +41,7 @@
                         <td> {{item.vergi_dairesi}} </td>
                         <td> {{item.vergi_no}} </td>
                         <td> {{item.aciklama}} </td>
-                        <td> {{item.yetkili}} </td>
+                        <!-- <td> {{item.yetkili}} </td> -->
                         <td> {{item.unvan}} </td>
                         <td>
                           <i
@@ -117,10 +119,10 @@
                     <textarea type="text" formControlName="aciklama" id="location" value="" required></textarea>
                 </div>
 
-                <div class="control-from">
+                <!-- <div class="control-from">
                     <label for="location">Yetkili </label>
                     <input type="text" formControlName="yetkili" id="location" value="" required>
-                </div>
+                </div> -->
 
                 <div class="control-from">
                     <label for="location">Unvan </label>

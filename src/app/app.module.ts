@@ -20,6 +20,9 @@ import { CustomerUpdateComponent } from './components/customer-update/customer-u
 import { ItemUpdateComponent } from './components/item-update/item-update.component';
 import { SupplierUpdateComponent } from './components/supplier-update/supplier-update.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { SearchPipe } from './components/project/search.pipe';
+import { ItemdataComponent } from './services/itemdata/itemdata.component';
+import { ProjectSaveditemsComponent } from './components/project-saveditems/project-saveditems.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CustomerUpdateComponent,
     ItemUpdateComponent,
     SupplierUpdateComponent,
+    SearchPipe,
+    ItemdataComponent,
+    ProjectSaveditemsComponent,
   ],
   imports: [
     BrowserModule,

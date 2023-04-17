@@ -21,7 +21,8 @@ export class ItemUpdateComponent implements OnInit {
     maliyet: 0,
     birim: '',
     tarih: new Date(),
-    item_id: 0
+    item_id:0,
+    selected: false
   }
 
   constructor(public modal:NgbModal,public fb:FormBuilder) { }

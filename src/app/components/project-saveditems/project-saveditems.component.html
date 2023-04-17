@@ -1,0 +1,87 @@
+<!-- 
+<div class="wrapp">
+    <div class="form">
+        <h1 class="title">Proje Ekle</h1>
+        <button type="button" class="btn-close" aria-label="Close" style="width: 30px;height:30px;position:absolute;right:0;top:0" (click)="close()"></button>
+        <form [formGroup]="projectForm" class="myform">
+
+          <div class="buut">
+            <button (click)="openitemdata(itemekle)">STOK EKLE <i class="fa-solid fa-plus"></i></button>
+          </div>
+          <br>
+            <div class="control-from">
+                <label for="firstname">Proje Adi</label>
+                <input type="text" formControlName="proje_adi" id="firstname" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="lastname">Kurum Adi</label>
+                <input type="text" formControlName="firma_adi" id="lastname" value="" required>
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Durum<span class="text-danger"> *</span></label
+      >
+      <select
+        formControlName="durum"
+        style="margin-top: 3%"
+        class="form-select"
+        name=""
+        id=""
+      >
+        <option value="Yeni">Yeni</option>
+        <option value="Çalışılıyor">Çalışılıyor</option>
+        <option value="Bekliyor">Bekliyor</option>
+        <option value="Müşteri Bekleniyor">Müşteri Bekleniyor</option>
+        <option value="Tamamlandı">Tamamlandı</option>
+      </select>
+
+            </div>
+
+            <div class="control-from">
+      <label class="form-control-label px-3"
+        >Müşteri Yetkili Kişi<span class="text-danger"> *</span></label
+      >
+      <select
+        formControlName="must_yet_kisi"
+        style="margin-top: 3%"
+        class="form-select form-control"
+        name=""
+        id=""
+      >
+        <option
+          *ngFor="let item of musteriCombobox"
+          value="musteri"
+          [value]="item.ad"
+        >
+          {{ item.ad + " " + item.soyad }}
+        </option>
+      </select>
+
+            </div>
+                      
+            <div class="full-width">
+                <label for="basla">Proje Başlama Tarihi</label>
+                <input type="date" formControlName="proje_basla" id="basla" value="" required>
+            </div>
+
+            <div class="control-from">
+                <label for="bitis">Proje Bitiş Tarihi</label>
+                <input type="date" formControlName="proje_bitis" id="bitis" value="" required>
+            </div>
+
+
+
+            <div class="buttonnnn">
+                <button (click)="upsertProject()"  id="kaydet">Kaydet</button>
+            </div>
+
+            <div class="control-from">
+              <label for="fiyat">Proje Fiyati </label>
+              <input type="text" formControlName="maliyet" id="fiyat" value="" required>
+          </div>
+          
+        </form>
+    </div>
+</div> -->

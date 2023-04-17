@@ -62,11 +62,11 @@ export class ItemComponent implements OnInit {
         console.log(res)
         alert("Kaydedildi!")
         this.getItem()
+        this.modal.dismissAll()
       })
     }else{
       alert("boslukları doldurun")
     }
-  this.modal.dismissAll()
 
   }
 
