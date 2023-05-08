@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -14,7 +14,18 @@ export class LeftbarComponent implements OnInit {
   itemCount:number=0
 
   navDisplay!:boolean
-
+  // screenWidth!: number;
+  
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event:any) {
+  //   this.screenWidth = event.target.innerWidth;
+  //   if (this.screenWidth >= 500) {
+  //     this.navDisplay = true;
+  //   } else {
+  //     this.navDisplay = false;
+  //   }
+    
+  // }
   navToggled:boolean=false
 
 
@@ -65,7 +76,9 @@ export class LeftbarComponent implements OnInit {
       this.itemCount=res.length
     })
   }
-
+  toggleNavi() {
+    this.navDisplay = !this.navDisplay;
+  }
 
 
   toggleNav() {

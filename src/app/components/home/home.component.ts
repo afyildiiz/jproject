@@ -44,10 +44,16 @@ export class HomeComponent implements OnInit {
     durum: '',
     maliyet: 0,
     proje_id: 0,
-    item_id: 0,
+    // item_ids: 0,
     aciklama: '',
     kar: 0,
-    toplam_item_fiyat: 0
+    toplam_item_fiyat: 0,
+    item_ids: 0,
+    finans_tip: '',
+    finans_tarih: new Date,
+    finans_miktar: 0,
+    finans_birim: '',
+    finans_aciklama: ''
   }
 
    displayNameMap:any = {
@@ -76,7 +82,7 @@ export class HomeComponent implements OnInit {
     this.getCustomer();
     this.getSupplier();
     this.getItems();
-    this.getComboboxNames();
+    // this.getComboboxNames();
     this.getlastproject();
     this.projectForm=this.fb.group({
       firma_adi:['',Validators.required],
@@ -135,12 +141,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getComboboxNames(){
-    this.task.getComboboxName().subscribe((res:any)=>{
-      this.musteriCombobox=res
-      console.log(res)
-    })
-  }
+  // getComboboxNames(){
+  //   this.task.getComboboxName().subscribe((res:any)=>{
+  //     this.musteriCombobox=res
+  //     console.log(res)
+  //   })
+  // }
 
 
 

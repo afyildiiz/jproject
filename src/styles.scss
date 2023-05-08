@@ -148,3 +148,45 @@ h1 {
 .row{
   margin: 5px;
 }
+
+.modalcustom .modal-dialog{
+  width: 100% !important;
+  height: 75% !important;
+
+}
+.modalcustom .modal-content {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 576px){
+  .modalcustom .modal-dialog {
+       max-width: 100%;
+      // margin: 1.75rem auto;
+  }
+  }
+  .modalcustom .modal-dialog{
+    display: flex !important;
+    width: 70% !important;
+    justify-content: flex-end;
+  
+  }
+
+
+
+
+
+
+
+  // @media screen and (max-width: 768px) {
+  //   .sidebar {
+  //     position: static;
+  //     width: 100%;
+  //     background-color: #909eaa;
+  //     margin-top: -3rem;
+  //   }
+  
+  //   .sidebar-nav {
+  //     position: static;
+  //   }
+  // }

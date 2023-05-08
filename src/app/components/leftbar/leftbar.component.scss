@@ -152,3 +152,36 @@ Hover
   color: rgb(249, 249, 255);
   font-weight: bold;
 }
+
+.togglebut button{
+  display: none;
+}
+
+@media screen and (max-width:500px) {
+  .togglebut button{
+    display: block;
+    transition: all;
+    :hover{
+      transition:all 0.5 ease ;
+    }
+
+  }
+}
+
+
+
+/* Küçük ekranlar için */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    background-color: #909eaa;
+    margin-top: -3rem;
+  }
+
+  .sidebar-nav {
+    position: static;
+  }
+}
+
+

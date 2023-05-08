@@ -32,7 +32,7 @@ export class ProjeUpdateComponent implements OnInit {
     //   durum:[this.data.durum,Validators.required],
     //   maliyet:[this.data.maliyet,Validators.required]
     // })
-    this.getComboboxNames();
+    // this.getComboboxNames();
   }
   get f(){
     return this.updateForm.controls
@@ -41,12 +41,7 @@ export class ProjeUpdateComponent implements OnInit {
   close(){
     this.modal.dismissAll()
   }
-  getComboboxNames(){
-    this.task.getComboboxName().subscribe((res:any)=>{
-      this.musteriCombobox=res
-      console.log(res)
-    })
-  }
+
 
   // updateProject() {
   //   if (this.projectForm.valid) {

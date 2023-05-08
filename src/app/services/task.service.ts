@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Customer } from '../customer';
 import { Item } from '../item';
 import { Pipeline } from '../pipeline';
@@ -31,7 +31,7 @@ export class TaskService {
   constructor(private http:HttpClient) { }
 
   getToken(){
-    return "37424486274128852561"
+    return "33566881671267571824"
     // return localStorage.getItem('token')
   }
 
@@ -136,13 +136,26 @@ export class TaskService {
     return this.http.post(baseUrl + 'Applications/DataOps', body)
   }
   
-  getComboboxName(){
+  getComboboxName(firma_adi:string):Observable<Customer[]>{
     const body={
       Token:this.getToken(),
       DataStoreId:'15714231125814142573',
       Operation:'read',
       Encrypted:1951,
-      Data:'select ad,soyad from "postgres".public.j_customers'
+      Data: `SELECT * FROM "postgres".public.j_customers WHERE sirket_adi = '${firma_adi}'`
+    }
+    return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
+      return response.message
+    }))
+  }
+
+  getFirmaAdiForProj(){
+    const body={
+      Token:this.getToken(),
+      DataStoreId:'15714231125814142573',
+      Operation:'read',
+      Encrypted:1951,
+      Data: 'select distinct sirket_adi from "postgres".public.j_customers'
     }
     return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
       return response.message
@@ -233,7 +246,7 @@ export class TaskService {
       "DataStoreId": "87162637677132734427",
       "Operation": "upsert",
       "Data": `Update j_pipeline ` +
-        `Set proje_adi='${values.proje_adi}', firma_adi='${values.firma_adi}',must_yet_kisi='${values.must_yet_kisi}', durum='${values.durum}',proje_basla='${values.proje_basla}',proje_bitis='${values.proje_bitis}',maliyet='${values.maliyet}',is_kalemi='${values.is_kalemi}',aciklama='${values.aciklama}',toplam_item_fiyat=${values.toplam_item_fiyat},kar=${values.kar}` +
+        `Set proje_adi='${values.proje_adi}', firma_adi='${values.firma_adi}',must_yet_kisi='${values.must_yet_kisi}', durum='${values.durum}',proje_basla='${values.proje_basla}',proje_bitis='${values.proje_bitis}',maliyet=${values.maliyet},aciklama='${values.aciklama}',toplam_item_fiyat=${values.toplam_item_fiyat},kar=${values.kar}` +
         `WHERE proje_id = ${values.proje_id}`
     }
 
@@ -241,8 +254,7 @@ export class TaskService {
       "Token": this.getToken(),
       "DataStoreId": "87162637677132734427",
       "Operation": "upsert",
-      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,is_kalemi,aciklama,toplam_item_fiyat,kar) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.is_kalemi}','${values.aciklama}',${values.toplam_item_fiyat},${values.kar})`
-
+      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,aciklama,toplam_item_fiyat,kar,finans_tip,finans_tarih,finans_miktar,finans_birim,finans_aciklama) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.aciklama}',${values.toplam_item_fiyat},${values.kar},'${values.finans_tip}','${values.finans_tarih}',${values.finans_miktar},'${values.finans_birim}','${values.finans_aciklama}')`
     }
 
     return this.http.post(baseUrl + 'Applications/DataOps', type == 'insert' ? insertBody : updateBody).pipe(

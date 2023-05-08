@@ -1,67 +1,69 @@
 // .content-body{
 //   width: 85%;
-.navbar{
-  display:contents;
-}
+
 .wrap {
   width: 100%;
   margin: 0 auto;
-  }
-  .content-body{
+}
+.leftbar{
+  width: 19%;
+  float: left;
+  margin-top: 1rem;
+}
+.routero{
+  width: 80%;
+  float: left;
+  margin-top: 1rem;
+}
+.navbar{
   width: 100%;
   float: left;
-  }
+}
 
-  .leftbar, .navbar, .routero{
-  width: 100%;
-  float: left;
-  }
-  @media only screen and (min-width: 500px) {
-  .wrap {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .leftbar{
-    width: 19%;
-    float: left;
-    margin-top: 1rem;
-  }
-  .routero{
-    width: 80%;
-    float: left;
-    margin-top: 1rem;
-  }
-  .navbar{
-    width: 100%;
-    float: left;
-  }
 
-  }
-  @media only screen and (min-width: 500px) {
-  .wrap {
-    width: 100%;
-    margin: 0 auto;
-  }
-  }
-
-  @media screen and (max-width:1000px) {
+  @media only screen and (max-width: 768px) {
     .navbar{
-      position: relative;
-      display: block;
+      display:contents;
+    }
+    .wrap {
+      width: 100%;
+      margin: 0 auto;
+      }
+      .content-body{
+      width: 100%;
+      // float: left;
+      }
+    
+       .navbar, .routero{
+      width: 100%;
+      // float: left;
+      }
+  }
+
+  .leftbar {
+    /* Leftbar özellikleri */
+    width: 19em;
+  }
+  
+  .routero {
+    /* Content özellikleri */
+    width: calc(100% - 19em);
+  }
+  
+  @media (max-width: 768px) {
+    /* Ekran boyutu 768 pikselden küçük olduğunda */
+    .leftbar {
+      position: static;
+      width: 100%;
+      background-color: #909eaa;
+
+    }
+  
+    
+    .routero {
+      width: 90%;
     }
   }
+  
 
 
-  // @media screen and (max-width: 600px) {
-  //   #leftBar{
-  //      position: fixed;
-  //      top: 0;
-  //      width:100%
-  //    }
-  //    .content-body{
-  //      width: 100%;
-  //      position: fixed;
-  //      margin-top: 60rem;
-  //      height: 100%;
-  //    }
-  //  }

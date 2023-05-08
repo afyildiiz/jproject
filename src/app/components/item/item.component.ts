@@ -18,6 +18,20 @@ export class ItemComponent implements OnInit {
   
   items:Item[]=[]
 
+  itemcik:Item={
+    item_adi: '',
+    kategori: '',
+    marka: '',
+    model: '',
+    miktar_birim: 0,
+    durum: '',
+    maliyet: 0,
+    birim: '',
+    tarih: new Date(),
+    item_id: 0,
+    selected: false
+  }
+
   itemForm!:FormGroup
   constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) {}
 

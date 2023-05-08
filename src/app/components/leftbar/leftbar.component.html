@@ -1,128 +1,36 @@
 
 
+  <button class="button btn-primary togglebut" style="  width: 50px;" (click)="toggleNavi()"><i class="fa-solid fa-bars"></i> </button>
 
 <section class="app">
-  <aside class="sidebar">
+  <aside [style.display]="navDisplay ? 'none' : 'block'" class="sidebar" >
          <header class="font-weight-bold">
           <img style="width: 200px" src="../../../assets/mepa-enerji-logo.png" alt="">
       </header>
-    <nav class="sidebar-nav">
+    <nav class="sidebar-nav" >
  
       <ul>
         <li>
           <a [routerLink]="['/home']" routerLinkActive="active"><i class="fa-solid fa-house"></i><span style="margin-left:1.5em">Anasayfa</span></a>
-          <!-- <ul class="nav-flyout">
-            <li>
-              <a [routerLink]="['/supplier']"><i class="ion-ios-color-filter-outline"></i></a>
-            </li>
-            <li>
-              <a [routerLink]="['/item']"><i class="ion-ios-clock-outline"></i></a>
-            </li>
-            <li>
-              <a [routerLink]="['/customer']"><i class="ion-android-star-outline"></i></a>
-            </li>
-            <li>
-              <a [routerLink]="['/project']"><i class="ion-heart-broken"></i></a>
-            </li>
-          </ul> -->
+
         </li>
         <li>
           <a [routerLink]="['/supplier']"><i class="fa-solid fa-truck-field"></i><span style="margin-left:1.5em" class="">Tedarikçiler</span></a>
-          <!-- <ul class="nav-flyout">
-            <li>
-              <a href="#"><i class="ion-ios-alarm-outline"></i>Watch</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-camera-outline"></i>Creeper</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-chatboxes-outline"></i>Hate</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-cog-outline"></i>Grinder</a>
-            </li>
-          </ul> -->
+
         </li>
         <li>
           <a [routerLink]="['/customer']"><i class="fa-solid fa-users"></i> <span style="margin-left:1.5em" class="">Müşteriler</span></a>
-          <!-- <ul class="nav-flyout">
-            <li>
-              <a href="#"><i class="ion-ios-flame-outline"></i>Burn</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-lightbulb-outline"></i>Bulbs</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-location-outline"></i>Where You</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-locked-outline"></i>On Lock</a>
-            </li>
-             <li>
-              <a href="#"><i class="ion-ios-navigate-outline"></i>Ghostface</a>
-            </li>
-          </ul> -->
+
         </li>
         <li>
           <a [routerLink]="['/item']"><i class="fa-solid fa-pen"></i> <span style="margin-left: 2em;" class="">Stoklar</span></a>
-          <!-- <ul class="nav-flyout">
-            <li>
-              <a href="#"><i class="ion-ios-timer-outline"></i>Timers</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-arrow-graph-down-left"></i>You Lose</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-partlysunny-outline"></i>Stormy</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-timer-outline"></i>Lookie Look</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-game-controller-a-outline"></i>Dork Mfer</a>
-            </li>
-          </ul> -->
+
         </li>
         <li>
           <a [routerLink]="['/project']"><i class="fa-regular fa-file-lines"></i> <span style="margin-left: 2.5em;" class="">Projeler</span></a>
-          <!-- <ul class="nav-flyout">
-            <li>
-              <a href="#"><i class="ion-ios-filing-outline"></i>File Cab</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-information-outline"></i>Infos</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-paperplane-outline"></i>Planes</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-android-star-outline"></i>Shop</a>
-            </li>
-          </ul> -->
+
         </li>
-        <!-- <li>
-          <a href="#"><i class="ion-ios-navigate-outline"></i> <span class="">Ass Finder</span></a>
-          <ul class="nav-flyout">
-            <li>
-              <a href="#"><i class="ion-ios-flame-outline"></i>Burn</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-lightbulb-outline"></i>Bulbs</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-location-outline"></i>Where You</a>
-            </li>
-            <li>
-              <a href="#"><i class="ion-ios-locked-outline"></i>On Lock</a>
-            </li>
-             <li>
-              <a href="#"><i class="ion-ios-navigate-outline"></i>Ghostface</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#"><i class="ion-ios-medical-outline"></i> <span class="">Cocaine</span></a>
-        </li> -->
+
       </ul>
     </nav>
   </aside>

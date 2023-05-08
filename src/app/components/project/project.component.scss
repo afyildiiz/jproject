@@ -94,7 +94,7 @@ $gray1: #fbfbfb;
 .wrapper {
   // background-color: $gray0;
   width: 100%;
-  min-height: 100vh;
+  // min-height: 100vh;
   
   .line {
     width: 100%;
@@ -689,4 +689,41 @@ th {
    -webkit-transform: rotate(45deg);
    -ms-transform: rotate(45deg);
    transform: rotate(45deg);
+}
+
+
+
+
+
+
+
+
+//finansal form
+
+
+.finansalForm {
+  background: #F4F5F7;
+  padding: 25px;
+
+}
+
+.finansalForm label {
+  // display: block;
+  color: #A8AAC5;
+  font-weight: bold;
+  font-size: .8rem;
+  margin-bottom: 10px;
+}
+
+.finansalForm input,select {
+  border: 0;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  color: #155BDA;
+  font-weight: 700;
+  font-size: .9rem;
+  text-indent: 15px;
+  border: 2px solid transparent;
+  transition: border 250ms;
 }
