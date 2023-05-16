@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, enableProdMode } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from 'src/app/customer';
@@ -6,13 +6,33 @@ import { Customer } from 'src/app/customer';
 import { TaskService } from 'src/app/services/task.service';
 import Swal from 'sweetalert2';
 import { CustomerUpdateComponent } from '../customer-update/customer-update.component';
+import DataSource from 'devextreme/data/data_source';
+import 'devextreme/data/odata/store'
 
+if (!/localhost/.test(document.location.host)) {
+  enableProdMode();
+}
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  dataSource: DataSource;
+
+  collapsed = false;
+
+  contentReady = (e:any) => {
+    if (!this.collapsed) {
+      this.collapsed = true;
+      e.component.expandRow(['EnviroCare']);
+    }
+  };
+
+  customizeTooltip = (pointsInfo:any) => ({ text: `${parseInt(pointsInfo.originalValue)}%` });
+
+
+
   customers:Customer[]=[]
 
   customerForm!:FormGroup
@@ -21,7 +41,10 @@ export class CustomerComponent implements OnInit {
   //   {sirket_adi:"JENERATORCU",ad:"fatih",soyad:"yildiz",adres:"İstanbul,beykoz,hüviyet sk. no:3",tel:"05555555555",email:"afyildiz@gmail.com",vergi_dairesi:"Beykoz vergi dairesi",vergi_no:111111,aciklama:"boş",yetkili:"Fatih Yildiz"},
   //   {sirket_adi:"KABLO SIRKETI",ad:"Hüseyin",soyad:"Tan",adres:"İstanbul,sultanbeyli,aaaaa sk. no:55",tel:"05555555555",email:"huseyintan@gmail.com",vergi_dairesi:"Sultanbeyli vergi dairesi",vergi_no:121212121,aciklama:"boş",yetkili:"Hüseyin Tan"},
   // ]
-  constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { }
+  constructor(public modal:NgbModal,private fb:FormBuilder,private task:TaskService) { 
+    this.dataSource = this.task.getDataSource()
+
+  }
 
   ngOnInit(): void {
     this.task.addRecentlyViewedComponent(this.constructor.name);

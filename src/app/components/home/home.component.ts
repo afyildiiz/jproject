@@ -32,29 +32,6 @@ export class HomeComponent implements OnInit {
 
   recentComponents:string[]=[]
 
-  data:Pipeline={
-    // yetkili: '',
-    firma_adi: '',
-    // sehir: '',
-    must_yet_kisi: '',
-    proje_adi: '',
-    proje_basla: new Date(),
-    proje_bitis: new Date(),
-    // aciklama: '',
-    durum: '',
-    maliyet: 0,
-    proje_id: 0,
-    // item_ids: 0,
-    aciklama: '',
-    kar: 0,
-    toplam_item_fiyat: 0,
-    item_ids: 0,
-    finans_tip: '',
-    finans_tarih: new Date,
-    finans_miktar: 0,
-    finans_birim: '',
-    finans_aciklama: ''
-  }
 
    displayNameMap:any = {
     item: 'Stoklar',

@@ -23,6 +23,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { SearchPipe } from './components/project/search.pipe';
 import { ItemdataComponent } from './services/itemdata/itemdata.component';
 import { ProjectSaveditemsComponent } from './components/project-saveditems/project-saveditems.component';
+import {
+  DxDataGridModule,
+  DxBulletModule,
+  DxTemplateModule,
+} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,11 @@ import { ProjectSaveditemsComponent } from './components/project-saveditems/proj
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    DxDataGridModule,
+    DxBulletModule,
+    DxTemplateModule
+    
 
 
 

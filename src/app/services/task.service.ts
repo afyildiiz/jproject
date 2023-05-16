@@ -7,6 +7,7 @@ import { Pipeline } from '../pipeline';
 import { Supplier } from '../supplier';
 
 import { baseUrl } from '../utils/baseUrl';
+import DataSource from 'devextreme/data/data_source';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,25 @@ export class TaskService {
 
   constructor(private http:HttpClient) { }
 
+  getDataSource() {
+    return new DataSource({
+      store: {
+        type: 'odata',
+        url: '',
+        key: 'Id',
+        beforeSend(request) {
+          const year = new Date().getFullYear() - 1;
+          request.params.startDate = `${year}-05-10`;
+          request.params.endDate = `${year}-5-15`;
+        },
+      },
+    });
+  }
+
+
+
   getToken(){
-    return "33566881671267571824"
+    return "26155656174267253133"
     // return localStorage.getItem('token')
   }
 
@@ -174,6 +192,21 @@ export class TaskService {
       return response.message
     }))
   }
+
+  getItem(itemIds:number){
+    const body={
+      Token:this.getToken(),
+      DataStoreId:'62723767246517453585',
+      Operation:'read',
+      Encrypted:1951,
+      Data:`select * from "postgres".public.j_item where item_id IN ('${itemIds}')`
+    }
+    return this.http.post(baseUrl+'Applications/Dataops',body).pipe(map((response:any)=>{
+      return response.message
+    }))
+  }
+
+
   insertItem(data:Item){
     const body={
       Token:this.getToken(),
@@ -254,7 +287,7 @@ export class TaskService {
       "Token": this.getToken(),
       "DataStoreId": "87162637677132734427",
       "Operation": "upsert",
-      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,aciklama,toplam_item_fiyat,kar,finans_tip,finans_tarih,finans_miktar,finans_birim,finans_aciklama) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.aciklama}',${values.toplam_item_fiyat},${values.kar},'${values.finans_tip}','${values.finans_tarih}',${values.finans_miktar},'${values.finans_birim}','${values.finans_aciklama}')`
+      "Data":`insert into "postgres".public.j_pipeline(firma_adi,must_yet_kisi,proje_adi,proje_basla,proje_bitis,durum,maliyet,aciklama,toplam_item_fiyat,kar,finans_tip,finans_tarih,finans_miktar,finans_birim,finans_aciklama,item_ids) values('${values.firma_adi}','${values.must_yet_kisi}','${values.proje_adi}','${values.proje_basla}','${values.proje_bitis}','${values.durum}',${values.maliyet},'${values.aciklama}',${values.toplam_item_fiyat},${values.kar},'${values.finans_tip}','${values.finans_tarih}',${values.finans_miktar},'${values.finans_birim}','${values.finans_aciklama}',{${values.item_ids}})`
     }
 
     return this.http.post(baseUrl + 'Applications/DataOps', type == 'insert' ? insertBody : updateBody).pipe(

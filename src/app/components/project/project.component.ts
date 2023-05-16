@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { NgbActiveModal, NgbModal, NgbModalRef, NgbNav } from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, forkJoin, map, switchMap } from 'rxjs';
 import { Customer } from 'src/app/customer';
 import { Item } from 'src/app/item';
 import { Itemdata } from 'src/app/itemdata';
@@ -23,6 +23,7 @@ export class ProjectComponent implements OnInit {
   @ViewChild ('closebutton') closebutton:any;
   selectedItem: Item[] = [];
   itemm!:any[]
+  eklenmisitem!:any[]
 
 	placement = 'bottom';
 
@@ -64,7 +65,7 @@ selectedProject:Pipeline={
   aciklama: '',
   kar: 0,
   toplam_item_fiyat: 0,
-  item_ids: 0,
+  item_ids: [],
   finans_tip: '',
   finans_tarih: new Date,
   finans_miktar: 0,
@@ -80,7 +81,7 @@ data:Pipeline={
   durum: '',
   maliyet: 0,
   proje_id: 0,
-  item_ids: 0,
+  item_ids: [],
   aciklama: '',
   kar: 0,
   toplam_item_fiyat: 0,
@@ -110,6 +111,7 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
 
 
   ngOnInit(): void {
+    console.log("eklenen item",this.eklenmisitem)
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -138,25 +140,13 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
           aciklama: new FormControl(this.selectedProject.aciklama, Validators.required),
           toplam_item_fiyat: new FormControl(this.selectedProject.toplam_item_fiyat, Validators.required),
           kar: new FormControl(this.selectedProject.kar, Validators.required),
-          // item_ids: this.fb.array([]) ,// burada, seçilen item'ların listesini tutacak bir FormControl ekledik
+          item_ids: this.fb.array([]) ,// burada, seçilen item'ların listesini tutacak bir FormControl ekledik
           finans_tip: new FormControl(this.selectedProject.finans_tip, Validators.required),
           finans_tarih: new FormControl(this.selectedProject.finans_tarih, Validators.required),
           finans_miktar: new FormControl(this.selectedProject.finans_miktar, Validators.required),
           finans_birim: new FormControl(this.selectedProject.finans_birim, Validators.required),
           finans_aciklama: new FormControl(this.selectedProject.finans_aciklama, Validators.required),
         });
-
-        // finans_tip
-        // finans_tarih
-        // finans_miktar
-        // finans_birim
-        // finans_aciklama
-        // this.itemdataform=this.fb.group({
-        //   item_adi: new FormControl(this.selecteditemdata.item_adi, Validators.required),
-        //   item_adet: new FormControl(this.selecteditemdata.item_adet, Validators.required),
-        //   item_maliyet: new FormControl(this.selecteditemdata.item_maliyet, Validators.required),
-
-        // })
 
         this.projectForm.get('firma_adi')?.valueChanges
         .pipe(
@@ -194,15 +184,14 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
     if (event.target.checked) {
       this.selectedItem.push(this.items[index]);
       formArray.push(new FormControl(event.target.value));
+      console.log("eklendi",this.selectedItem)
     } else {
       this.uncheck(this.items[index]);  
       formArray.removeAt(index);
     }
+    this.projectForm.patchValue({ item_ids: this.selectedItem.map(item => item.item_id) });
     
   }
-  
-
-  
 
   uncheck(item:any){
     const index = this.selectedItem.indexOf(item);
@@ -268,39 +257,22 @@ constructor(private modal:NgbModal,private fb:FormBuilder,private task:TaskServi
     ).catch(() => { });
   }
 
-  getSelectedItems() {
-    const selectedItems = this.items.filter(item => item.selected)
-    if (selectedItems.length === 0) {
-      return "";
-    }
-    return selectedItems.map(item => item.item_id).join(',');
+  getItemsByProjectId(projectId: number) {
+    const eklenenItem:any = [];
+    this.projects.forEach(project => {
+      if (project.proje_id === projectId) {
+        project.item_ids.forEach(itemId => {
+          const item = this.items.find(i => i.item_id === itemId);
+          if (item) {
+            eklenenItem.push(item);
+          }
+        });
+      }
+    });
+    return eklenenItem;
   }
   
-// //   Kurum adını tutan değişken
-// // selectedKurum: string;
-
-// // Combobox'ta gösterilecek müşterileri tutan dizi
-// // musteriCombobox: Array<{ ad: string; soyad: string }> = [];
-
-// Kurum adı değiştiğinde tetiklenecek fonksiyon
-// onKurumAdiChanged() {
-//   // Seçilen kurum adı varsa
-//   if (this.selectedKurum) {
-//     // Kurum id'sini veritabanından sorgulayıp elde edin
-//     const kurumId = this.kurumlar.find(k => k.ad === this.selectedKurum)?.id;
-//     if (kurumId) {
-//       // Kuruma ait müşterileri sorgulayın
-//       const musteriListesi = this.musteriler.filter(m => m.kurum_id === kurumId);
-//       // Combobox'ta gösterilecek müşteri listesini güncelleyin
-//       this.musteriCombobox = musteriListesi.map(m => ({ ad: m.ad, soyad: m.soyad }));
-//     }
-//   } else {
-//     // Kurum adı seçilmediyse müşteri listesini boşaltın
-//     this.musteriCombobox = [];
-//   }
-// }
-
-
+itemler!:any[]
 
 
 addeditems:Pipeline[]=[]
@@ -308,9 +280,32 @@ addeditems:Pipeline[]=[]
   upsertProject(): void {
     let data = Object.assign(this.selectedProject, this.projectForm.value)
     let type = data.proje_id == '' ? 'insert' : 'update'
-    // data.item_ids = this.selectedItems1
-    const newItem = this.projectForm.value;
-    this.addeditems.push(newItem); // Yeni veri addedItems dizisine eklenir
+    // const newItem = this.projectForm.value;
+    // this.addeditems.push(newItem); // Yeni veri addedItems dizisine eklenir
+
+    data.item_ids = this.selectedItem.map(item => item.item_id);
+    const itemData = this.selectedItem.map(item => {
+      return {
+        item_id: item.item_id,
+        item_adi: item.item_adi,
+        marka: item.marka,
+        model: item.model,
+        miktar_birim: item.miktar_birim,
+        maliyet: item.maliyet
+      };
+    });
+    data.item_ids = this.selectedItem.map(item => item.item_id);
+    // data.item_data = itemData;
+    this.eklenmisitem=itemData
+    console.log(this.eklenmisitem) 
+    // data.item_ids = this.selectedItem.map(item => {
+    //   return { item_id: item.item_id, item_adi: item.item_adi,marka:item.marka,model:item.model,miktar_birim:item.miktar_birim,maliyet:item.maliyet }
+    // });
+    const formArray: FormArray = this.projectForm.get('item_ids') as FormArray;
+    formArray.clear(); // Mevcut item_ids FormArray'ini temizle
+    this.selectedItem.forEach((item) => {
+      formArray.push(new FormControl(item.item_id)); // Seçili itemleri item_ids FormArray'ine ekle
+    });
     if (this.projectForm && !this.projectForm.valid) {
       Swal.fire('Lütfen Tüm Alanları Doldurunuz!', '', 'info')
 
@@ -339,7 +334,7 @@ addeditems:Pipeline[]=[]
 
             this.getProject()
             this.projectForm.reset()
-            this.selectedItems1 = []
+            // this.selectedItems1 = []
             this.items.forEach(item => {
               item.selected = false
             });

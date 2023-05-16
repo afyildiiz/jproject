@@ -1,4 +1,3 @@
-import { Item } from "./item";
 
 export interface Pipeline{
     // yetkili:string,
@@ -11,7 +10,7 @@ export interface Pipeline{
     durum:string,
     maliyet:number,
     proje_id:number,
-    item_ids:number,
+    item_ids:number[],
     // selected:boolean,
     
     aciklama:string,

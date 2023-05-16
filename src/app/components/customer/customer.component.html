@@ -1,67 +1,73 @@
 
-            <div class="wrapper">
-              <div class="title">
-                MÜŞTERİLER
-                <div class="line"></div>
-              </div>
-              <div class="container">
-            <button (click)="openCustomer(customer)" class="btn btn-success" style="float: left;width: 50px;height: 50px;margin-bottom:1rem"><i class="fa-solid fa-plus"></i></button>
-                
-                <div class="table">
-                  <div class="search" style="margin-bottom: 3rem">
-                    <!-- <app-search-bar></app-search-bar> -->
-                <input class="search__input" type="text" placeholder="Search">
-            
-                  </div>
-                  <table cellspacing="0" cellpadding="0">
-                    <thead>
-                      <tr>
-                        <th scope="col">Şirket Adı</th>
-                        <th scope="col">Ad</th>
-                        <th scope="col">Soyad</th>
-                        <th scope="col">Adres</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Vergi Dairesi</th>
-                        <th scope="col">Vergi No</th>
-                        <th scope="col">Açıklama</th>
-                        <!-- <th scope="col">Yetkili Kişi</th> -->
-                        <th scope="col">Unvan</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of customers">
-                        <td > {{item.sirket_adi}} </td>
-                        <td>{{item.ad}}</td>
-                        <td> {{item.soyad}} </td>
-                        <td> {{item.adres}} </td>
-                        <td> {{item.tel}} </td>
-                        <td> {{item.email}} </td>
-                        <td> {{item.vergi_dairesi}} </td>
-                        <td> {{item.vergi_no}} </td>
-                        <td> {{item.aciklama}} </td>
-                        <!-- <td> {{item.yetkili}} </td> -->
-                        <td> {{item.unvan}} </td>
-                        <td>
-                          <i
-                            (click)="openUpdateCustomer()"
-                            style="cursor: pointer"
-                            class="fa-solid fa-pen-to-square"
-                          ></i>
-                          <i
-                            (click)="
-                              deleteCustomer(item.id);
-                            "
-                            style="margin-left: 15%; cursor: pointer"
-                            class="fa-solid fa-trash"
-                          ></i>
-                        </td>
-                      </tr>
-          </tbody>
-        </table>
+<div class="aaa" style="padding:50px">
+<button (click)="openCustomer(customer)" class="btn btn-success" style="float: left;width: 50px;height: 50px;margin-bottom:1rem"><i class="fa-solid fa-plus"></i></button>
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="customers"
+    [remoteOperations]="false"
+    [allowColumnReordering]="true"
+    [rowAlternationEnabled]="true"
+    [showBorders]="true"
+    (onContentReady)="contentReady($event)"
+  >
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[10, 25, 50, 100]"
+    ></dxo-pager>
+    <dxo-search-panel
+      [visible]="true"
+      [highlightCaseSensitive]="true"
+    ></dxo-search-panel>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  
+    <dxi-column dataField="sirket_adi" [groupIndex]="0" caption="Sirket Adi"></dxi-column>
+    <dxi-column
+      dataField="ad"
+      caption="Ad"
+      dataType="string"
+      alignment="right"
+    ></dxi-column>
+    <dxi-column
+      caption="Soyad"
+      dataField="soyad"
+      dataType="string"
+      alignment="right"
+    ></dxi-column>
+    <dxi-column dataField="adres" dataType="string" caption="Adres"></dxi-column>
+    <dxi-column dataField="tel" dataType="number" caption="Telefon"></dxi-column>
+    <dxi-column dataField="email" dataType="string" caption="Email"></dxi-column>
+    <dxi-column dataField="vergi_dairesi" dataType="string" caption="Vergi Dairesi"></dxi-column>
+    <dxi-column dataField="vergi_no" dataType="numeric" [width]="150" caption="Vergi No"></dxi-column>
+    <dxi-column dataField="aciklama" dataType="string" [width]="150" caption="Aciklama"></dxi-column>
+    <dxi-column dataField="yetkili" dataType="string" [width]="150" caption="Yetkili"></dxi-column>
+    <dxi-column dataField="unvan" dataType="string" [width]="150" caption="Unvan"></dxi-column>
+  
+  
+    <div *dxTemplate="let d of 'discountCellTemplate'">
+      <div class="chart-cell">
+        <dx-bullet
+          [showTarget]="false"
+          [showZeroLevel]="true"
+          [startScaleValue]="0"
+          [endScaleValue]="100"
+          [value]="d.value * 100"
+        >
+          <dxo-size [width]="150" [height]="35"></dxo-size>
+          <dxo-tooltip
+            [enabled]="true"
+            [paddingTopBottom]="2"
+            [customizeTooltip]="customizeTooltip"
+          >
+            <dxo-font [size]="18"></dxo-font>
+          </dxo-tooltip>
+          <dxo-margin [top]="5" [bottom]="0" [left]="5"></dxo-margin>
+        </dx-bullet>
       </div>
     </div>
+  </dx-data-grid>
   </div>
 
     

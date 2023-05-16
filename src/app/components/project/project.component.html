@@ -196,14 +196,15 @@
                       </tr>
                     </thead>
                       <tbody>
-                          <tr >
-                              <td> </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
+                        <tr *ngFor="let item of eklenmisitem">
+                          <td>{{ item.item_adi }}</td>
+                          <td>{{ item.marka }}</td>
+                          <td>{{ item.model }}</td>
+                          <td>{{ item.miktar_birim }}</td>
+                          <td>{{ item.maliyet }}</td>
                           </tr>
                       </tbody>
+                      
                   </table>
               </div>
           </div>
@@ -403,7 +404,7 @@
                                 <td> {{item.item_adi}} </td>
                                 <!-- <td> {{item.miktar_birim}} </td> -->
                                 <!-- <td > {{item.maliyet}} {{item.birim}} </td> -->
-                                <td><input type="number" id=""></td>
+                                <!-- <td><input type="number" id=""></td> -->
                                 <td> {{item.maliyet}} </td>
                             </tr>
                         </tbody>
@@ -569,8 +570,9 @@
                             <tr *ngFor="let item of items;let i=index">
                                 <th>
                                     <label class="customcheckbox">
-                                      <input type="button" formArrayName="item_ids" [value]="item.item_id" (change)="onCheckboxChange($event, i)">
-                                        <span class="checkmark"></span>
+                                      <input type="checkbox" class="checkmark"  formArrayName="item_ids" (click)="onCheckboxChange($event,i)">
+                                      <!-- [value]="item.item_id" (change)="onCheckboxChange($event, i)" -->
+                                        <span ></span>
                                     </label>
                                 </th>
                                 <td> {{item.item_adi}} </td>
